@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>PacMan Game</title>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="icon" href="media/icon.png" type="image/png" sizes="20x20">
 	</head>
 
 	<body>
+		<div id="menu">
+			<li>Welcome</li>
+			<li>Register</li>
+			<li>Login</li>
+			<li>Game</li>
+			<li>Settings</li>
+			<li>About</li>
+		</div>
+		<br>
+		<br>
+		<br>
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -14,8 +28,26 @@
 			<label for="lblTime">TIME:</label>
 			<input id="lblTime" type="text" />
 		</div>
-		<div id="game">
+		<br>
+		<br>
+		<div id="game" style = "text-align:center;">
 			<canvas id="canvas" height="600" width="600"></canvas>
+		</div>
+		<br>
+		<br>
+		<div id="Copyright">
+			<li id="Names">© Talya Sakov & Naama Baruch</li>
+			<br>
+			<li style="font-size: 13px;">Contact us through our Linkedin pages...</li>
+			<br>
+			<li>
+				<a href="https://www.linkedin.com/in/talya-sakov-733b9a202/">
+				  <img src="media/LinkedInSymbole.png" width="30px" height="17px"></a>
+			</li>
+			<li>
+				<a href="https://www.linkedin.com/in/naama-baruch-b2b59a1b7/">
+				  <img src="media/LinkedInSymbole.png" width="30px" height="17px"></a>
+			</li>
 		</div>
 	</body>
 </html>

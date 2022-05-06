@@ -69,7 +69,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 60);
 }
 
 function findRandomEmptyCell(board) {
