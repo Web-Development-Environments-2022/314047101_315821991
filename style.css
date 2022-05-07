@@ -1,3 +1,33 @@
+
+#ScreenItems
+{
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	padding-top: 20px;
+	padding-bottom: 40px;
+}
+
+#aboutDiv
+{
+	display: none;
+}
+
+#GameDiv
+{
+	display: none;
+}
+
+#registerDiv
+{
+	display: none;
+}
+
+#loginDiv
+{
+	display: none;
+}
+
 body {
 	background: url("https://c4.wallpaperflare.com/wallpaper/286/114/401/light-background-wallpaper-preview.jpg") no-repeat center center fixed; 
 	-webkit-background-size: cover;
@@ -5,18 +35,22 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 	width: 100%;
+	align-items: center;
+	justify-content: center;
 }
 
 h1
 {
 	color: white;
 	font-size: 40px;
+	font-family: Calibri;
 }
 
 h2
 {
 	color: white;
 	font-size: 20px;
+	font-family: Calibri;
 }
 
 #gameHeader
@@ -24,6 +58,8 @@ h2
 	text-align: center;
     font-family: Calibri;
 	background-color: black;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #score, #time
@@ -32,7 +68,7 @@ h2
     font-family: Calibri;
 }
 
-#menu
+#menuDiv
 {
 	top: 0%;
 	left: 0%;
@@ -41,7 +77,27 @@ h2
 	height: 35px;
 	text-align: center;
 	align-self: center;
-	z-index: 100;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.buttons
+{
+	padding: 0.7em 5em;
+	color: black;
+	background: orchid;
+}
+
+.WelcomeButtons
+{
+	padding: 1.2em 8em;
+	color: black;
+	background: orchid;
+}
+
+.buttons:hover, .WelcomeButtons:hover
+{
+	background-color: white;
 }
 
 li
