@@ -9,33 +9,43 @@
 	</head>
 
 	<body>
+		<div id="gameHeader">
+			<header>
+				<h1>Pac-Man Game</h1>
+				<img src=media/icon.png width=100 height=100 class="images"/>
+				<h2>Talya Sakov & Naama Baruch</h2>
+			  </header>
+		</div>
+		<br>
+		<br>
 		<div id="menu">
-			<li>Welcome</li>
-			<li>Register</li>
-			<li>Login</li>
-			<li>Game</li>
-			<li>Settings</li>
-			<li>About</li>
+			<li><button  id="welcom_button" onclick="changeDiv('welcom_div')">Welcome</button></li>
+			<li><button  id="register_button" onclick="changeDiv('register_div')">Register</button></li>
+			<li><button  id="login_button" onclick="changeDiv('login_div')">Login</button></li>
+			<li><button  id="settings_button" onclick="changeDiv('settings_div')">Settings</button></li>
+			<li><button  id="about_button" onclick="changeDiv('about_div')">About</button></li>
 		</div>
 		<br>
 		<br>
 		<br>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+		<div id="GameDiv">
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<br>
+			<br>
+			<div id="game" style = "text-align:center;">
+				<canvas id="canvas" height="600" width="600"></canvas>
+			</div>
+			<br>
+			<br>
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<br>
-		<br>
-		<div id="game" style = "text-align:center;">
-			<canvas id="canvas" height="600" width="600"></canvas>
-		</div>
-		<br>
-		<br>
-		<div id="Copyright">
+		<div id="Footer">
 			<li id="Names">© Talya Sakov & Naama Baruch</li>
 			<br>
 			<li style="font-size: 13px;">Contact us through our Linkedin pages...</li>

@@ -7,6 +7,25 @@ body {
 	width: 100%;
 }
 
+h1
+{
+	color: white;
+	font-size: 40px;
+}
+
+h2
+{
+	color: white;
+	font-size: 20px;
+}
+
+#gameHeader
+{
+	text-align: center;
+    font-family: Calibri;
+	background-color: black;
+}
+
 #score, #time
 {
     text-align: center;
@@ -22,7 +41,6 @@ body {
 	height: 35px;
 	text-align: center;
 	align-self: center;
-	background-color: rgb(255, 215, 146);
 	z-index: 100;
 }
 
@@ -46,7 +64,7 @@ li
     border: 5px solid pink;
 }
 
-#Copyright
+#Footer
 {
 	background-color: rgb(255, 215, 146);
 	text-align: center;
