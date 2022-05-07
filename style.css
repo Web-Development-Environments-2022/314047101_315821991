@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap');
+
+*
+{
+	font-family: 'Nunito', sans-serif;
+	list-style: none;
+	text-decoration: none;
+	box-sizing: border-box;
+}
 
 #ScreenItems
 {
@@ -48,20 +57,17 @@ h1
 {
 	color: white;
 	font-size: 40px;
-	font-family: Calibri;
 }
 
 h2
 {
 	color: white;
 	font-size: 20px;
-	font-family: Calibri;
 }
 
 #gameHeader
 {
 	text-align: center;
-    font-family: Calibri;
 	background-color: black;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -70,7 +76,6 @@ h2
 #score, #time
 {
     text-align: center;
-    font-family: Calibri;
 }
 
 #menuDiv
@@ -108,7 +113,6 @@ h2
 li
 {
 	display:inline;
-	font-family: Calibri;
 	text-align: center;
 	align-self: center;
 	font-size: 25px;
@@ -129,7 +133,6 @@ li
 {
 	background-color: rgb(255, 215, 146);
 	text-align: center;
-	font-family: Calibri;
 }
 
 #Names
@@ -140,4 +143,46 @@ li
 .closeButton {
 	font-size: 45px;
 	font-weight: 600;
+}
+
+form label,
+form input,
+form button {
+  border: 0;
+  margin-bottom: 3px;
+  display: block;
+  width: 100%;
+}
+
+form input {
+	height: 25px;
+	line-height: 25px;
+	background: #fff;
+	color: #000;
+	padding: 0 6px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+  }
+
+  form button {
+	height: 30px;
+	line-height: 30px;
+	background: #e67e22;
+	color: #fff;
+	margin-top: 10px;
+	cursor: pointer;
+  }
+
+  form {
+	padding: 20px;
+	background: #2c3e50;
+	color: #fff;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+  }
+
+  form .error {
+	color: #ff0000;
   }
