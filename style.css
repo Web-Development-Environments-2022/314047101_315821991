@@ -28,6 +28,11 @@
 	display: none;
 }
 
+#settingsDiv
+{
+	display: none;
+}
+
 body {
 	background: url("https://c4.wallpaperflare.com/wallpaper/286/114/401/light-background-wallpaper-preview.jpg") no-repeat center center fixed; 
 	-webkit-background-size: cover;
@@ -131,3 +136,8 @@ li
 {
 	font-size: 20px;
 }
+
+.closeButton {
+	font-size: 45px;
+	font-weight: 600;
+  }
