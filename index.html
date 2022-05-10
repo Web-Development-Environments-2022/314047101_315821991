@@ -9,6 +9,9 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="AllScripts/jquery.validate.min.js"></script>
 		<script src="AllScripts/form-validation.js"></script>
+		<script type="text/javascript" src="AllScripts/settings.js"></script>
+	
+		
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<link rel="icon" href="media/icon.png" type="image/png" sizes="20x20">
 	</head>
@@ -27,7 +30,7 @@
 			<li><button class="buttons" id="welcom_button" onclick="changeDiv('welcomDiv')">WELCOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
 			<li><button class="buttons" id="login_button" onclick="changeDiv('loginDiv')">LOGIN</button></li>
-			<li><button class="buttons" id="settings_button" onclick="changeDiv('settingsDiv')">SETTINGS</button></li>
+			
 			<li><button class="buttons" id="about_button" onclick="changeDiv('aboutDiv')">ABOUT</button></li>
 		</div>
 		<br>
@@ -67,18 +70,162 @@
 					<input type="date" name="BirthDate" id="BirthDate" class="FormInput" value="2000-01-01" min="1923-01-01" max="2023-01-01"/>
 					<br>
 				
-					<button type="submit">Register</button>
+					<button type="submit">Save</button>
+					<button type="button" id="submit_registeration" onclick="changeDiv('loginDiv')">Register</button>
 				
 				  </form>
 			</div>
 
 			<div id="loginDiv" class="windowDivs">
-				<h2>Please enter your username:</h2>
+				<form id="loginForm" name="login">
+
+
+					<button type="button"  style="margin: 30px 100px 200px;" onclick="changeDiv('settingsDiv')">Login</button>
+				
+				  </form>
 			</div>
 
 			<div id="settingsDiv" class="windowDivs">
-				<h2>Settings:</h2>
-			</div>
+				<form id="settingForm" name="settings">
+					<div id="keys_div">
+					<h2>Settings</h2>
+					<h2>Enter the settings manually or click the random button</h2>
+					
+				
+							<table id="keys" class="settingtable" >
+								<p style="display: inline-block;line-height: 0.7;">Select keyboard buttons:</p>
+								<tr>
+									<!--row 1-->
+									<th>Left Button</th>
+									<th>Up Button</th>
+									<th>Down Button</th>
+									<th>Right Button</th>
+								</tr>
+								<tr>
+									<!--row 2-->
+									<td>
+										<input type="text" id="leftKey" size="8" maxlength="1" onkeydown="getLeft(event)" >
+									</td>
+									<td>
+										<input type="text" id="upKey" size="8" maxlength="1" onkeydown="getUp(event)">
+									</td>
+									<td>
+										<input type="text" id="downKey" size="8" maxlength="1" onkeydown="getDown(event)">
+									</td>
+									<td>
+										<input type="text" id="rightKey" size="8" maxlength="1" onkeydown="getRight(event)">
+									</td>
+								</tr>
+				
+								<!--row 3: -->
+								<tr>
+									<td>
+										<i  id="left" hight="20" width="20" style="display: none;"></i>
+									</td>
+									<td>
+										<i  id="up" hight="20" width="20" style="display: none;"></i>
+									</td>
+									<td>
+										<i  id="down" hight="20" width="20" style="display: none;"></i>
+									</td>
+									<td>
+										<i  id="right" hight="20" width="20" style="display: none;"></i>
+									</td>
+								</tr>
+							</table> <!--key table-->	
+						</div><!--end of keys-->
+						
+						<br>
+						
+						<div id="num_of_ghost">
+							<div class="num of ghost">
+								<p style="display: inline-block;line-height: 0.7;">Select number of ghosts:</p>
+									<table class="settingtable">
+								<!--row 1-->
+								<tr>
+									<td>
+										1<input type="checkbox" name="skill" class="check" value=1 id="check1" checked>
+									</td>
+									<td style="padding-left: 17px">
+										2<input type="checkbox" name="skill" class="check" value=2 id="check2">
+									</td>
+									<td style="padding-left: 17px">
+										3<input type="checkbox" name="skill" class="check" value=3 id="check3">
+									</td>
+									<td style="padding-left: 17px">
+										4<input type="checkbox" name="skill" class="check" value=4 id="check4">
+									</td>
+								</tr>
+							</table><!--ghost table-->
+						</div> 				
+						</div><!--end num of ghost-->
+						<br>
+
+						<div class="num of balls">
+							<p style="display: inline ;line-height: 0.5; color: aliceblue;">Enter number of balls between 50 to 90:</p>
+						<input id="num_of_balls" type="text" size="10" maxlength="2" class="setting-input">
+							
+						</div><!--end num of balls-->
+						<br>
+
+						<div id="color">
+							<p style="line-height: 0.5; color: aliceblue;">Choose colors:</p>
+							<table class="settingtable">
+								<!--row 1-->
+								<tr>
+									<th>5 Points</th>
+									<th style="padding-left: 15px">15 Points</th>
+									<th style="padding-left: 15px">25 Points</th>
+								</tr>
+				
+								<!--row 2-->
+								<tr>
+									<td>
+										<input type="color" id="5pointsColor" name="5points" value="#ffffff">
+									</td>
+									<td style="padding-left: 15px">
+										<input type="color" id="15pointsColor" name="15points" value="#ffffff">
+									</td>
+									<td style="padding-left: 15px">
+										<input type="color" id="25pointsColor" name="25points" value="#ffffff">
+									</td>
+								</tr>
+							</table><!--color table-->
+						</div> <!--end color-->
+						<br>
+
+
+						<div id="time-picker">
+						
+							<p style="display: inline-block; line-height: 0.5;">Enter Time up to 60 sec: </p>
+							<input id="time" type="number" size="8" >
+						</div> <!--end time-->
+						
+						
+						<div id="randomBtn">
+							<button type="button"  style="margin: 40px 100px 200px; color: aliceblue;" onclick="setRandom()">Random Values!</button>
+							<button type="button" style="margin: 40px 100px 200px; color: aliceblue;" onclick="startPlay()">Start!</button>
+						</div> <!--end random-->
+				
+
+
+
+
+					</form>
+				</div><!--settings-->
+
+
+
+				<!--script for check only one box from checkbox of ghost number-->
+				<script>
+					$(document).ready(function(){
+						$('.check').click(function() {
+							$('.check').not(this).prop('checked', false);
+						});
+					});
+					</script>
+
+
 
 			<div id="aboutDiv" class="windowDivs">
 				<span class="closeButton">&times;</span>
@@ -86,6 +233,7 @@
 			</div>
 
 			<div id="GameDiv" class="windowDivs">
+				
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" />
@@ -122,6 +270,7 @@
 			</li>
 		</div>
 	</body>
+
 </html>
 
 
