@@ -17,6 +17,11 @@
 	padding-bottom: 40px;
 }
 
+#homeDiv
+{
+	display: none;
+}
+
 #aboutDiv
 {
 	display: none;
@@ -41,6 +46,7 @@
 {
 	display: none;
 }
+
 div.settingOption {
 	
     position: fixed;
@@ -108,14 +114,14 @@ h2
 
 
 
-.WelcomeButtons
+.homeButtons
 {
 	padding: 1.2em 8em;
 	color: black;
 	background: orchid;
 }
 
-.buttons:hover, .WelcomeButtons:hover
+.buttons:hover, .homeButtons:hover
 {
 	background-color: white;
 }

@@ -10,13 +10,21 @@ function LoginUser()
 {
     let user_name = document.getElementById("UserNameLogin").value;
     let password = document.getElementById("PasswordLogin").value;
-    if(user_name in localStorage & localStorage.getItem(user_name) == password)
+    if(user_name in localStorage)
     {
-        changeDiv('settingsDiv');
+        if(localStorage.getItem(user_name) == password)
+        {
+            changeDiv('settingsDiv');
+        }
+        else{
+            document.getElementById("PasswordLogin").value = "";
+            document.getElementById("PasswordLogin").placeholder = "Incorrect password, please try again..";
+        }
     }
     else
     {
-        window.alert("incorrect password for the given user");
-        changeDiv('loginDiv');
+        document.getElementById("PasswordLogin").value = "";
+        document.getElementById("UserNameLogin").value = "";
+        document.getElementById("UserNameLogin").placeholder = "This username doesn't exist, please try again..";
     }
 }
