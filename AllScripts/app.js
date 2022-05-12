@@ -9,6 +9,7 @@ var interval;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
+	$("#homeDiv").show();
 	Start();
 });
 

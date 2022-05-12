@@ -165,10 +165,10 @@ function setRandomColors(){
 }
 
 function setRandomTime(){
-    time = Math.floor(Math.random()*60000)+60;
-    if (time < 60) time = time + 60;
+    time = Math.floor(Math.random() * (180 - 60) + 60);
     document.getElementById("time").value = time;
 }
+
 function getGhostsNum(){
     var ghost_num = 1;
     //TODO: number of ghost can be also 2\3\4
