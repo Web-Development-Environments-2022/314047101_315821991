@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  localStorage.setItem('k', 'k');
+
   $.validator.addMethod("letters_numbers", function(value, element) {
     return this.optional(element) || /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9!@#$%&*]+$/i.test(value);
 },);
@@ -27,7 +29,7 @@ $.validator.addMethod("letters_only", function(value, element) {
           required: true,
           // Specify that Email should be validated
           // by the built-in "Email" rule
-          Email: true
+          email: true
         },
         Password: {
           required: true,
@@ -59,7 +61,10 @@ $.validator.addMethod("letters_only", function(value, element) {
       // Make sure the form is submitted to the destination defined
       // in the "action" attribute of the form when valid
       submitHandler: function(form) {
-        form.submit();
+        let user_name = document.getElementById("UserName").value;
+        let password = document.getElementById("Password").value;
+        localStorage.setItem(user_name, password);
+        changeDiv('loginDiv');        
       }
     });
   });

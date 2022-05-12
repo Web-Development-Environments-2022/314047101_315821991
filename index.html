@@ -3,10 +3,11 @@
 	<head>
 		<title>PacMan Game</title>
 		<script src="AllScripts/jquery-3.4.1.slim.min.js"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="AllScripts/app.js"></script>
 		<script type="text/javascript" src="AllScripts/window.js"></script>
-		<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+		<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 		<script type="text/javascript" src="AllScripts/jquery.validate.min.js"></script>
 		<script src="AllScripts/form-validation.js"></script>
 		<script type="text/javascript" src="AllScripts/settings.js"></script>
@@ -70,25 +71,20 @@
 					<input type="date" name="BirthDate" id="BirthDate" class="FormInput" value="2000-01-01" min="1923-01-01" max="2023-01-01"/>
 					<br>
 				
-					<button type="submit">Save</button>
-					<button type="button" id="submit_registeration" onclick="changeDiv('loginDiv')">Register</button>
-				
+					<button type="submit">Save</button>	
 				  </form>
 			</div>
 
 			<div id="loginDiv" class="windowDivs">
 				<form id="loginForm" name="login">
-
-
 					<label for="UserName">User Name</label>
-					<input type="text" name="UserName" id="UserName" class="FormInput" placeholder="Enter user name.." required/>
+					<input type="text" name="UserName" id="UserNameLogin" class="FormInput" placeholder="Enter user name.." required/>
 					<br>
 					
 					<label for="Password">Password</label>
-					<input type="password" name="Password" id="Password" class="FormInput" placeholder="Choose your password.." required/>
+					<input type="password" name="Password" id="PasswordLogin" class="FormInput" placeholder="Choose your password.." required/>
 					<br>
-					<button type="button"  style="margin: 30px 100px 200px;" onclick="changeDiv('settingsDiv')">Login</button>
-				
+					<button type="submit" onclick="LoginUser()">Login</button>
 				  </form>
 			</div>
 
