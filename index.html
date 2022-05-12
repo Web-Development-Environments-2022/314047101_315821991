@@ -166,8 +166,8 @@
 
 						<div class="num of balls">
 							<p style="display: inline ;line-height: 0.5; color: aliceblue;">Choose number of balls between 50 to 90:</p>
-						<input id="num_of_balls" type="range" name="num_of_balls" value="50" min="50" max="90" oninput="balls_out.value = this.value" class="setting-input">
-						<output id="balls_out" name="balls_out" for="num_of_balls">50</output>
+						<input id="num_of_balls" type="range" name="num_of_balls" value="50" min="50" max="90" oninput="dynamic_balls.value = this.value" class="setting-input">
+						<input value="50" id="dynamic_balls">
 						</div><!--end num of balls-->
 						<br>
 
@@ -199,15 +199,17 @@
 
 						<div id="time-picker">
 							<p style="display: inline-block; line-height: 0.5;">Choose game length (in seconds): </p>
-							<input id="time" type="range" name="time" value="60" min="60" max="180" oninput="time_out.value = this.value" class="setting-input">
-							<output id="time_out" name="time_out" for="time">60</output>
+							<input id="time" type="range" name="time" value="60" min="60" max="180" oninput="dynamic_time.value = this.value" class="setting-input">
+							<input value="60" id="dynamic_time">
 
 						</div> <!--end time-->
 						
 						
 						<div id="randomBtn">
-							<button type="button"  style="margin: 40px 100px 200px; color: aliceblue;" onclick="setRandom()">Random Values!</button>
-							<button type="button" style="margin: 40px 100px 200px; color: aliceblue;" onclick="startPlay()">Start!</button>
+							<br>
+							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="setRandom()">Random Values!</button>
+							<br>
+							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="startPlay()">Start!</button>
 						</div> <!--end random-->
 
 					</form>

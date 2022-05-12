@@ -148,6 +148,8 @@ function setRandomBalls(){
 
     numOfBalls = Math.floor(Math.random() * (41) + 50);
     document.getElementById("num_of_balls").value = numOfBalls;
+    document.getElementById("dynamic_balls").value = numOfBalls;
+
 }
 
 function setRandomColors(){
@@ -167,6 +169,7 @@ function setRandomColors(){
 function setRandomTime(){
     time = Math.floor(Math.random() * (180 - 60) + 60);
     document.getElementById("time").value = time;
+    document.getElementById("dynamic_time").value = time;
 }
 
 function getGhostsNum(){

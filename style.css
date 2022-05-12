@@ -219,6 +219,22 @@ table.settingtable, .setting-input{
     margin-right: auto;
 }
 
+#dynamic_balls, #dynamic_time
+{
+	width: 100px;
+	text-align: center;
+	color: #FFF;
+	background: transparent;
+	display: block;
+    margin:auto;
+}
+
+#randomBtn
+{
+	justify-content: center;
+	align-items: center;
+}
+
 /****GAME*****/
 .gameDiv {
     padding: 15px 10px;/*box size*/
