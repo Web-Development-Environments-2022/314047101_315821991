@@ -27,7 +27,9 @@
 		<br>
 		<br>
 		<div id="menuDiv">
-			<li><button class="buttons" id="set_button" onclick="changeDiv('GameDiv')">set</button></li>
+			<li><button class="buttons" id="set_button" onclick="changeDiv('GameDiv')">game</button></li>
+			<li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li>
+
 			<li><button class="buttons" id="home_button" onclick="changeDiv('homeDiv')">HOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
 			<li><button class="buttons" id="login_button" onclick="changeDiv('loginDiv')">LOGIN</button></li>
@@ -230,22 +232,114 @@
 
 			<div id="GameDiv" class="windowDivs">
 				<div id="settings_display">
-					<h2>Settings:</h2>
-					<p>number of balls:</p>
-					<input value="50" id="balls_set">
-				</div>
-				<div id="user_name_label">
+				<form id="settingDisplayForm" name="settingDisplayForm">
 					<label for="lblusername">Player:</label>
 					<input id="lblusername" type="text" />
-				</div>
-				<div id="score">
-					<label for="lblScore">SCORE:</label>
-					<input id="lblScore" type="text" />
-				</div>
-				<div id="time">
-					<label for="lblTime">TIME:</label>
-					<input id="lblTime" type="text" />
-				</div>
+					<div id="keys_display">
+					<h2>Settings</h2>
+						<table id="teable_display" class="settingtable" >
+							<p style="display: inline-block;line-height: 0.7; font-size: 20px;">keyboard Buttons:</p>
+							<tr>
+								<!--row 1-->
+								<th style="font-size: 15px;">Left</th>
+								<th style="font-size: 15px;">Up</th>
+								<th style="font-size: 15px;">Down</th>
+								<th style="font-size: 15px;">Right</th>
+							</tr>
+							<tr>
+								<!--row 2-->
+								<td>
+									<input id="left_key" type="text" readonly="readonly"/>
+								</td>
+								<td>
+									<input id="up_key" type="text" readonly="readonly"/>
+								</td>
+								<td>
+									<input id="down_key" type="text" readonly="readonly"/>
+								</td>
+								<td>
+									<input id="right_key" type="text" readonly="readonly"/>
+								</td>
+							</tr>
+						</table> <!--key table-->	
+					</div><!--end of keys-->
+					<br>
+					
+					<div>
+						<div>
+							<p style="display: inline-block;line-height: 0.7;">Ghosts Number:</p>
+							<input id="ghost_number_display" type="text" readonly="readonly"/>
+						</div> 				
+					</div><!--end num of ghost-->
+					<br>
+
+					<div>
+						<div>
+							<p style="display: inline-block;line-height: 0.7;">Time To Play:</p>
+							<input id="time_to_play_display" type="text" readonly="readonly"/>
+						</div> 				
+					</div>
+					<br>
+
+					<div>
+						<div>
+							<p style="display: inline-block;line-height: 0.7;">Time To Play:</p>
+							<input id="time_to_play_display" type="text" readonly="readonly"/>
+						</div> 				
+					</div>
+					<br>
+
+					<div>
+						<div>
+							<p style="display: inline-block;line-height: 0.7;">Number Of Balls:</p>
+							<input id="balls_number_display" type="text" readonly="readonly"/>
+						</div> 				
+					</div>
+					<br>
+
+					<div id="colorDisplay">
+						<p style="line-height: 0.5; color: aliceblue;">Colors:</p>
+						<table class="settingtable">
+							<!--row 1-->
+							<tr>
+								<th>5 Points</th>
+								<th style="padding-left: 15px">15 Points</th>
+								<th style="padding-left: 15px">25 Points</th>
+							</tr>
+							<!--row 2-->
+							<tr>
+								<td style="padding-left: 15px">
+									<input id="5pointsColor_display" type="text" readonly="readonly"/>
+								</td>
+								<td style="padding-left: 15px">
+									<input id="15pointsColor_display" type="text" readonly="readonly"/>
+								</td>
+								<td style="padding-left: 15px">
+									<input id="25pointsColor_display" type="text" readonly="readonly"/>
+								</td>
+							</tr>
+						</table><!--color table-->
+					</div> <!--end color-->
+
+					<div id="gameProgressDisplay">
+						<p style="line-height: 0.5; color: aliceblue;">Game Progress::</p>
+						<table class="gameDisplay">
+							<tr>
+								<th style="padding-left: 15px"><label for="lblScore">SCORE:</label></th>
+								<th style="padding-left: 15px"><label for="lblTime">TIME:</label></th>
+							</tr>
+							<tr>
+								<td style="padding-left: 15px">
+									<input id="lblScore" type="text" />
+								</td>
+								<td style="padding-left: 15px">
+									<input id="lblTime" type="text" />
+								</td>
+							</tr>
+						</table>
+					</div>
+					<br>
+					</form>
 				<br>
 				<br>
 				<div id="game" style = "text-align:center;">
@@ -254,6 +348,7 @@
 				<br>
 				<br>
 			</div>
+		</div>
 		<br>
 		<br>
 		<br>

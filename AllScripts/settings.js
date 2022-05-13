@@ -172,16 +172,18 @@ function startPlay() {
     number_of_balls = parseInt(balls_num);
 
     number_of_ghost = getGhostsNum();
+    document.getElementById("ghost_number_display").value = number_of_ghost;
 
     amount_of_time = document.getElementById("time").value;
-    
+    time = amount_of_time;
+    document.getElementById("time_to_play_display").value = amount_of_time;
+
     colorPoints5 = document.getElementById("5pointsColor").value;
 
     colorPoints15 = document.getElementById("15pointsColor").value;
 
     colorPoints25 = document.getElementById("25pointsColor").value;
 
-    time = amount_of_time;
 
     Start();
     changeDiv('GameDiv');
