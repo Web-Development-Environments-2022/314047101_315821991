@@ -13,6 +13,11 @@ var amount_of_time;
 var colorPoints5;
 var colorPoints15;
 var colorPoints25;
+var game_background_music = new Audio('media/game_sound.mp3');
+
+function StopMusic() { //todo - stop music when exiting the game
+	audio.pause();
+}
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -21,6 +26,7 @@ $(document).ready(function() {
 });
 
 function Start() {
+	game_background_music.play();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";

@@ -27,7 +27,7 @@
 		<br>
 		<br>
 		<div id="menuDiv">
-			<li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li>
+			<li><button class="buttons" id="set_button" onclick="changeDiv('GameDiv')">set</button></li>
 			<li><button class="buttons" id="home_button" onclick="changeDiv('homeDiv')">HOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
 			<li><button class="buttons" id="login_button" onclick="changeDiv('loginDiv')">LOGIN</button></li>
@@ -229,6 +229,11 @@
 				</div><!--settings-->
 
 			<div id="GameDiv" class="windowDivs">
+				<div id="settings_display">
+					<h2>Settings:</h2>
+					<p>number of balls:</p>
+					<input value="50" id="balls_set">
+				</div>
 				<div id="user_name_label">
 					<label for="lblusername">Player:</label>
 					<input id="lblusername" type="text" />

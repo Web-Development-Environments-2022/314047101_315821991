@@ -183,5 +183,6 @@ function startPlay() {
 
     time = amount_of_time;
 
+    Start();
     changeDiv('GameDiv');
 }
