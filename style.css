@@ -22,14 +22,6 @@
 	display: none;
 }
 
-#aboutDiv
-{
-	display: none;
-	background-color: pink;
-	width: 200px;
-	height: 200px;
-}
-
 #GameDiv
 {
 	display: none;
@@ -80,6 +72,12 @@ h2
 {
 	color: white;
 	font-size: 15px;
+}
+
+h3
+{
+	color: white;
+	font-size: 25px;
 }
 
 #gameHeader
@@ -157,11 +155,6 @@ li
 #Names
 {
 	font-size: 20px;
-}
-
-.closeButton {
-	font-size: 45px;
-	font-weight: 600;
 }
 
 form label,
@@ -265,4 +258,42 @@ table.settingtable, .setting-input{
 {
 	color: rgb(197, 85, 104);
 	border-color: rgb(197, 85, 104);
+}
+
+.popupContainer
+{
+	display: none;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgba(0, 0, 0, 0.7);
+	padding-top: 300px;
+	z-index: 1;
+	overflow: auto;
+}
+
+.popupContent
+{
+	background: url("media/about_back.jpg");
+	height: 90%;
+	width: 30%;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+}
+
+.closeButton {
+	color: white;
+	float: left;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+  color: yellow;
+  text-decoration: none;
+  cursor: pointer;
 }

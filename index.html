@@ -31,13 +31,25 @@
 			<li><button class="buttons" id="home_button" onclick="changeDiv('homeDiv')">HOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
 			<li><button class="buttons" id="login_button" onclick="changeDiv('loginDiv')">LOGIN</button></li>
-			
-			<li><button class="buttons" id="about_button" onclick="changeDiv('aboutDiv')">ABOUT</button></li>
+			<li><button class="buttons" id="about_button" onclick="aboutOn()">ABOUT</button></li>
 		</div>
 		<br>
 		<br>
 		<br>
 		<div id="ScreenItems">
+
+			<div id="dPopupContainer" class="popupContainer">
+				<div id="dPopupContent" class="popupContent">
+					<span class="closeButton" onclick="aboutOff()">&times;</span>
+					<h3>About Us</h3>
+					<h2>Hi,<br>We are Talya and Naame, nice to meet you!</h2>
+					<h2>In this game, we used Jquery in order to validate the registration form.</h2>
+					<br>
+					<h2>Difficulties we encountered with:<br>creating the modal window for the "about" section. 
+						How did we solve this eventually? We found in Google a tutorial video that demonstrates 
+						how to do this step by step.</h2>
+				</div>
+			</div>
 
 			<div id="homeDiv" class="windowDivs">
 				<h1>Welcome!</h1>
@@ -223,13 +235,6 @@
 						});
 					});
 					</script>
-
-
-
-			<div id="aboutDiv" class="windowDivs">
-				<span class="closeButton">&times;</span>
-				<h2>About our game:</h2>
-			</div>
 
 			<div id="GameDiv" class="windowDivs">
 				<div id="user_name_label">

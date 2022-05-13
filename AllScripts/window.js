@@ -30,3 +30,27 @@ function LoginUser()
     }
     document.getElementById("loginForm").reset();
 }
+
+function aboutOn()
+{
+    const popupContainter = document.getElementById("dPopupContainer");
+    popupContainter.style.display = "block";
+
+    window.addEventListener("click", function(event) {
+        if(event.target == popupContainter){
+            $(".popupContainer").hide();
+        }
+    });
+
+    $(document).keydown(function(e) {
+    var code = e.keyCode || e.which;
+    if (code == 27)
+        $(".popupContainer").hide();
+    });
+}
+
+function aboutOff()
+{
+    const popupContainter = document.getElementById("dPopupContainer");
+    popupContainter.style.display = "none";
+}
