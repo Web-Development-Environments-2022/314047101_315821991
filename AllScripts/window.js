@@ -19,13 +19,14 @@ function LoginUser()
         }
         else{
             document.getElementById("PasswordLogin").value = "";
-            document.getElementById("PasswordLogin").placeholder = "Incorrect password, please try again..";
+            alert("Incorrect password, please try again..");
         }
     }
     else
     {
         document.getElementById("PasswordLogin").value = "";
         document.getElementById("UserNameLogin").value = "";
-        document.getElementById("UserNameLogin").placeholder = "This username doesn't exist, please try again..";
+        alert("This username doesn't exist, please try again.");
     }
+    document.getElementById("loginForm").reset();
 }
