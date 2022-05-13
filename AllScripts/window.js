@@ -15,6 +15,7 @@ function LoginUser()
         if(localStorage.getItem(user_name) == password)
         {
             changeDiv('settingsDiv');
+            connected_user_name = user_name;
         }
         else{
             document.getElementById("PasswordLogin").value = "";
