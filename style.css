@@ -46,6 +46,21 @@ html
 	display: none;
 }
 
+#GameDiv
+{
+	display: flex;
+}
+
+#settings_display
+{
+	width: 40%;
+}
+
+#game
+{
+	width: 70%;
+}
+
 div.settingOption {
 	
     position: fixed;
@@ -298,4 +313,14 @@ table.settingtable, .setting-input{
   color: yellow;
   text-decoration: none;
   cursor: pointer;
+}
+
+.keys_input_disply
+{
+	text-align: center;
+}
+
+#ghost_number_display, #time_to_play_display, #balls_number_display, #lblScore, #lblusername
+{
+	text-align: center;
 }

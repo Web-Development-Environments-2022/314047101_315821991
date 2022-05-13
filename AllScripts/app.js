@@ -6,7 +6,6 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-var connected_user_name;
 var number_of_balls;
 var number_of_ghost;
 var amount_of_time;

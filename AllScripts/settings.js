@@ -1,9 +1,9 @@
 var time;
 
-var upBtn;
-var downBtn;
-var leftBtn;
-var rightBtn;
+var upBtn = 38;
+var downBtn = 40;
+var leftBtn = 37;
+var rightBtn = 39;
 
 function BtnValues(code) {
     switch (code) {
@@ -97,7 +97,6 @@ function setRandomKey(){
     document.getElementById("up").style.display = "inherit";
     document.getElementById("down").style.display = "inherit";
     document.getElementById("right").style.display = "inherit";
-
 }
 
 
@@ -167,9 +166,10 @@ function getGhostsNum(){
 }
 
 function startPlay() {
-    // get number of balls
+    // update relevant fealds
     var balls_num = document.getElementById("num_of_balls").value;
     number_of_balls = parseInt(balls_num);
+    document.getElementById("balls_number_display").value = number_of_balls;
 
     number_of_ghost = getGhostsNum();
     document.getElementById("ghost_number_display").value = number_of_ghost;
@@ -179,11 +179,18 @@ function startPlay() {
     document.getElementById("time_to_play_display").value = amount_of_time;
 
     colorPoints5 = document.getElementById("5pointsColor").value;
+    document.getElementById("5pointsColor_display").style.backgroundColor = colorPoints5;
 
     colorPoints15 = document.getElementById("15pointsColor").value;
+    document.getElementById("15pointsColor_display").style.backgroundColor = colorPoints15;
 
     colorPoints25 = document.getElementById("25pointsColor").value;
+    document.getElementById("25pointsColor_display").style.backgroundColor = colorPoints25;
 
+    document.getElementById("left_key").value = BtnValues(leftBtn);
+    document.getElementById("up_key").value = BtnValues(upBtn);
+    document.getElementById("down_key").value = BtnValues(downBtn);
+    document.getElementById("right_key").value = BtnValues(rightBtn);
 
     Start();
     changeDiv('GameDiv');
