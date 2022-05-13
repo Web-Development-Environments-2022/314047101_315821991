@@ -25,6 +25,9 @@
 #aboutDiv
 {
 	display: none;
+	background-color: pink;
+	width: 200px;
+	height: 200px;
 }
 
 #GameDiv
