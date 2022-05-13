@@ -168,24 +168,18 @@ function getGhostsNum(){
 function startPlay() {
     // update relevant fealds
     var balls_num = document.getElementById("num_of_balls").value;
-    number_of_balls = parseInt(balls_num);
-    document.getElementById("balls_number_display").value = number_of_balls;
+    document.getElementById("balls_number_display").value = parseInt(balls_num);
 
-    number_of_ghost = getGhostsNum();
-    document.getElementById("ghost_number_display").value = number_of_ghost;
+    document.getElementById("ghost_number_display").value = getGhostsNum();
 
-    amount_of_time = document.getElementById("time").value;
-    time = amount_of_time;
-    document.getElementById("time_to_play_display").value = amount_of_time;
+    time = document.getElementById("time").value;
+    document.getElementById("time_to_play_display").value = time;
 
-    colorPoints5 = document.getElementById("5pointsColor").value;
-    document.getElementById("5pointsColor_display").style.backgroundColor = colorPoints5;
+    document.getElementById("5pointsColor_display").style.backgroundColor = document.getElementById("5pointsColor").value;
 
-    colorPoints15 = document.getElementById("15pointsColor").value;
-    document.getElementById("15pointsColor_display").style.backgroundColor = colorPoints15;
+    document.getElementById("15pointsColor_display").style.backgroundColor = document.getElementById("15pointsColor").value;
 
-    colorPoints25 = document.getElementById("25pointsColor").value;
-    document.getElementById("25pointsColor_display").style.backgroundColor = colorPoints25;
+    document.getElementById("25pointsColor_display").style.backgroundColor = document.getElementById("25pointsColor").value;
 
     document.getElementById("left_key").value = BtnValues(leftBtn);
     document.getElementById("up_key").value = BtnValues(upBtn);

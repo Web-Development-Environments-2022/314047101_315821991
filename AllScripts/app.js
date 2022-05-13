@@ -6,12 +6,6 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-var number_of_balls;
-var number_of_ghost;
-var amount_of_time;
-var colorPoints5;
-var colorPoints15;
-var colorPoints25;
 var game_background_music = new Audio('media/game_sound.mp3');
 
 function StopMusic() { //todo - stop music when exiting the game
