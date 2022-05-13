@@ -28,82 +28,56 @@ function BtnValues(code) {
         case 40:
             k ="⇩";
             break;
+        default:
+            k = String.fromCharCode(code);
     }
     return k;
 }
 
-function getLeft(event) {
-    var new_key = event.which || event.keyCode;
-    var flag = checkKey(new_key);
-    if (leftBtn == null || flag) {
-        leftBtn = new_key;
-        if (new_key >= 37 && new_key <= 40)
-            flag=true;
-        else flag=false;
-        if (flag){
-            document.getElementById("leftKey").value=BtnValues(new_key);
+function getChoosenKey(key_type) {
+    $(document).on('keydown',function(event){
+        new_key = event.keyCode;
+        switch (key_type) {
+            case "leftKey":
+                if(new_key == upBtn || new_key == downBtn || new_key == rightBtn)
+                {
+                    alert("This character is used for another button, please select a free character");
+                    break;
+                }
+                document.getElementById("leftKey").value =  BtnValues(new_key);
+                leftBtn = new_key;
+                break;
+            case "upKey":
+                if(new_key == leftBtn || new_key == downBtn || new_key == rightBtn)
+                {
+                    alert("This character is used for another button, please select a free character");
+                    break;
+                }
+                document.getElementById("upKey").value =  BtnValues(new_key);
+                upBtn = new_key;
+                break;
+            case "downKey":
+                if(new_key == leftBtn || new_key == upBtn || new_key == rightBtn)
+                {
+                    alert("This character is used for another button, please select a free character");
+                    break;
+                }
+                document.getElementById("downKey").value =  BtnValues(new_key);
+                downBtn = new_key;
+                break;
+            case "rightKey":
+                if(new_key == leftBtn || new_key == upBtn || new_key == downBtn)
+                {
+                    alert("This character is used for another button, please select a free character");
+                    break;
+                }
+                document.getElementById("rightKey").value =  BtnValues(new_key);
+                rightBtn = new_key;
+                break;
         }
-        document.getElementById("left").style.display = "block";
-    }
+        $(document).off('keydown');
+        })
 }
-
-function getUp(event) {
-    var new_key = event.which || event.keyCode;
-    var flag = checkKey(new_key);
-    if (upBtn == null || flag) {
-        upBtn = new_key;
-        if (new_key >= 37 && new_key <= 40)
-            flag=true;
-        else flag=false;
-        if (flag){
-            document.getElementById("upKey").value=BtnValues(new_key);
-        }
-        document.getElementById("up").style.display = "block";
-    }
-}
-function getDown(event) {
-    var new_key = event.which || event.keyCode;
-    var flag = checkKey(new_key);
-    if (downBtn == null || flag) {
-        downBtn = new_key;
-        if (new_key >= 37 && new_key <= 40)
-            flag=true;
-        else flag=false;
-        if (flag){
-            document.getElementById("downKey").value=BtnValues(new_key);
-        }
-        document.getElementById("down").style.display = "block";
-    }
-}
-function getRight(event) {
-    var new_key = event.which || event.keyCode;
-    var flag = checkKey(new_key);
-    if (rightBtn == null ||flag) {
-        rightBtn = new_key;
-        if (new_key >= 37 && new_key <= 40)
-            flag=true;
-        else flag=false;
-        if (flag) {
-            document.getElementById("rightKey").value = BtnValues(new_key);
-        }
-        document.getElementById("right").style.display = "block";
-    }
-}
-function checkKey(new_key){
-    return (new_key !== 91 && new_key !== 120
-         && new_key !== 9 && new_key !== 112 
-         && new_key !==27 && new_key !== 113 
-         && new_key !== 114 && new_key !== 115
-        && new_key !== 116 && new_key !== 117 
-        && new_key !== 118 && new_key !== 119
-         && new_key !== 20 && new_key !== 121 
-         && new_key !== 122 && new_key !== 123 
-         && new_key !== 124);
-
-}
-
-
-
 
 function setRandom() {
 
@@ -116,8 +90,6 @@ function setRandom() {
     setRandomTime();
 
     setRandomColors();
-    
-
 }
 
 function setRandomKey(){

@@ -95,27 +95,27 @@
 					<h2>Settings</h2>
 					<h2>Enter the settings manually or click the random button</h2>
 							<table id="keys" class="settingtable" >
-								<p style="display: inline-block;line-height: 0.7;">Select keyboard buttons:</p>
+								<p style="display: inline-block;line-height: 0.7; font-size: 20px;">Select keyboard buttons:</p>
 								<tr>
 									<!--row 1-->
-									<th>Left Button</th>
-									<th>Up Button</th>
-									<th>Down Button</th>
-									<th>Right Button</th>
+									<th style="font-size: 15px;">Left</th>
+									<th style="font-size: 15px;">Up</th>
+									<th style="font-size: 15px;">Down</th>
+									<th style="font-size: 15px;">Right</th>
 								</tr>
 								<tr>
 									<!--row 2-->
 									<td>
-										<input type="text" value="⇦" id="leftKey" size="8" maxlength="1" onkeydown="getLeft(event)" >
+										<input class="Keys_in" type="button" value="⇦" id="leftKey" onclick="getChoosenKey('leftKey')" >
 									</td>
 									<td>
-										<input type="text" value="⇧" id="upKey" size="8" maxlength="1" onkeydown="getUp(event)">
+										<input class="Keys_in" type="button" value="⇧" id="upKey" onkeydown="getChoosenKey('upKey')">
 									</td>
 									<td>
-										<input type="text" value="⇩" id="downKey" size="8" maxlength="1" onkeydown="getDown(event)">
+										<input class="Keys_in" type="button" value="⇩" id="downKey"onkeydown="getChoosenKey('downKey')">
 									</td>
 									<td>
-										<input type="text" value="➪" id="rightKey" size="8" maxlength="1" onkeydown="getRight(event)">
+										<input class="Keys_in" type="button" value="➪" id="rightKey" onkeydown="getChoosenKey('rightKey')">
 									</td>
 								</tr>
 				
@@ -206,9 +206,9 @@
 						
 						<div id="randomBtn">
 							<br>
-							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="setRandom()">Random Values!</button>
+							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="setRandom()">Generate Random Settings</button>
 							<br>
-							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="startPlay()">Start!</button>
+							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="startPlay()">Start The Game</button>
 						</div> <!--end random-->
 
 					</form>

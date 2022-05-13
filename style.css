@@ -247,3 +247,19 @@ table.settingtable, .setting-input{
     height: 100px;
     visibility: hidden;
 }
+
+.Keys_in
+{
+	text-align: center;
+	color: black;
+	font-size: 20px;
+	width: 100px;
+	border: 2px solid black;
+	cursor: pointer;
+}
+
+.Keys_in:focus
+{
+	color: rgb(197, 85, 104);
+	border-color: rgb(197, 85, 104);
+}
