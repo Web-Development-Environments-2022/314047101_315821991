@@ -27,7 +27,7 @@
 		<br>
 		<br>
 		<div id="menuDiv">
-			<!-- <li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li> -->
+			<li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li>
 			<li><button class="buttons" id="home_button" onclick="changeDiv('homeDiv')">HOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
 			<li><button class="buttons" id="login_button" onclick="changeDiv('loginDiv')">LOGIN</button></li>
@@ -215,26 +215,18 @@
 						</div> <!--end time-->
 						
 						
-						<div id="randomBtn">
+						<div id="randomBtn" class="settings_btn_ment">
 							<br>
 							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="setRandom()">Generate Random Settings</button>
 							<br>
-							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="startPlay()">Start The Game</button>
 						</div> <!--end random-->
+						<div id="startGameBtn" class="settings_btn_ment">
+							<button class="set_btn" style="display:block; margin: 0 auto;" type="button" onclick="startPlay()">Start The Game</button>
+						</div>
+
 
 					</form>
 				</div><!--settings-->
-
-
-
-				<!--script for check only one box from checkbox of ghost number-->
-				<script>
-					$(document).ready(function(){
-						$('.check').click(function() {
-							$('.check').not(this).prop('checked', false);
-						});
-					});
-					</script>
 
 			<div id="GameDiv" class="windowDivs">
 				<div id="user_name_label">

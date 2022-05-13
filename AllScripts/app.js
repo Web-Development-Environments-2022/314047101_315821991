@@ -7,6 +7,12 @@ var start_time;
 var time_elapsed;
 var interval;
 var connected_user_name;
+var number_of_balls;
+var number_of_ghost;
+var amount_of_time;
+var colorPoints5;
+var colorPoints15;
+var colorPoints25;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");

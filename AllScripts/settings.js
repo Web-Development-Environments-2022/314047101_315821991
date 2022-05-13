@@ -1,18 +1,9 @@
 var time;
-var ghosts;
 
 var upBtn;
 var downBtn;
 var leftBtn;
 var rightBtn;
-
-var numOfBalls;
-
-var colorPoints5;
-var colorPoints15;
-var colorPoints25;
-
-
 
 function BtnValues(code) {
     switch (code) {
@@ -112,13 +103,27 @@ function setRandomKey(){
 
 
 function setRandomGhosts(){
-    document.getElementById("num_of_ghost").value = 1;
-   //TODO: if one put V on checkbox doffrent then 1, whan click RandomBtn the V is not chang to 1 
+    let ghosts = Math.floor(Math.random() * (4) + 1);
+
+    $('input[type=checkbox]').prop('checked', false);
+
+    if (ghosts == 1) {
+        document.getElementById("check1").checked = true;
+    }
+    if (ghosts == 2) {
+        document.getElementById("check2").checked = true;
+    }
+    if (ghosts == 3) {
+        document.getElementById("check3").checked = true;
+    }
+    if (ghosts == 4) {
+        document.getElementById("check4").checked = true;
+    }
 }
 
 function setRandomBalls(){
 
-    numOfBalls = Math.floor(Math.random() * (41) + 50);
+    let numOfBalls = Math.floor(Math.random() * (41) + 50);
     document.getElementById("num_of_balls").value = numOfBalls;
     document.getElementById("dynamic_balls").value = numOfBalls;
 
@@ -126,16 +131,13 @@ function setRandomBalls(){
 
 function setRandomColors(){
     var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-    colorPoints5 = randomColor;
-    document.getElementById("5pointsColor").value = colorPoints5;
+    document.getElementById("5pointsColor").value = randomColor;
 
     randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-    colorPoints15 = randomColor;
-    document.getElementById("15pointsColor").value = colorPoints15;
+    document.getElementById("15pointsColor").value = randomColor;
 
     randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-    colorPoints25 = randomColor;
-    document.getElementById("25pointsColor").value = colorPoints25;
+    document.getElementById("25pointsColor").value = randomColor;
 }
 
 function setRandomTime(){
@@ -145,73 +147,41 @@ function setRandomTime(){
 }
 
 function getGhostsNum(){
-    var ghost_num = 1;
-    //TODO: number of ghost can be also 2\3\4
+    var check_1 = document.getElementById("check1");
+    var check_2 = document.getElementById("check2");
+    var check_3 = document.getElementById("check3");
+    var check_4 = document.getElementById("check4");
 
-   
+    if (check_1.checked) {
+        return 1;
+    }
+    if (check_2.checked) {
+        return 2;
+    }
+    if (check_3.checked) {
+        return 3;
+    }
+    if (check_4.checked) {
+        return 4;
+    }
 }
-function getTime(){
-    var game_time = document.getElementById("time").value;
 
-    if (parseInt(game_time) >= 60)
-        time = game_time;
-
-    else
-        alert("Worng time value");
-}
-
-function getBallsNum(){
+function startPlay() {
+    // get number of balls
     var balls_num = document.getElementById("num_of_balls").value;
-    balls_num = parseInt(balls_num);
-    if (balls_num >= 50 && balls_num <= 90)
-        numOfBalls = balls_num;
+    number_of_balls = parseInt(balls_num);
 
-    if (isNaN(balls_num) || balls_num > 90 || balls_num < 50)
-        alert("Number of balls out of range");
+    number_of_ghost = getGhostsNum();
 
-}
-
-
-function get_values(){
-    getBallsNum();
-
-    getGhostsNum();
+    amount_of_time = document.getElementById("time").value;
     
-    getTime();
-    numOfBalls = parseInt(document.getElementById("num_of_balls").value);
-    
-    ghosts =  document.getElementById("num_of_ghost").value;
-
     colorPoints5 = document.getElementById("5pointsColor").value;
 
     colorPoints15 = document.getElementById("15pointsColor").value;
 
     colorPoints25 = document.getElementById("25pointsColor").value;
 
-    time = document.getElementById("time").value;
+    time = amount_of_time;
 
-
-}
-function startPlay() {
-    get_values();
-    var ballsFlag=false;
-    var colorPointsFlag =false;
-    var ghostFlag =false;
-    var timeFlag =false;
-    if(typeof (numOfBalls) != NaN)
-        ballsFlag=true;
-    if(typeof (colorPoints5) != "#fffff" && typeof (colorPoints15) != "#fffff" && typeof (colorPoints25) != "#fffff")
-        colorPointsFlag=true;
-    if (typeof (ghosts) != "")
-        ghostFlag=true;
-     if(typeof (time) != "")
-        timeFlag=true;
-
-    if (ballsFlag && colorPointsFlag && timeFlag &&ghostFlag)
-         
-        changeDiv('GameDiv');
-    
-    else
-        alert("Please fill the settings fields");
-
+    changeDiv('GameDiv');
 }
