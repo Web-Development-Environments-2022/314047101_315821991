@@ -26,11 +26,6 @@ html
 	display: none;
 }
 
-#GameDiv
-{
-	display: none;
-}
-
 #registerDiv
 {
 	display: none;
@@ -48,17 +43,19 @@ html
 
 #GameDiv
 {
-	display: flex;
+	display: none;
 }
 
 #settings_display
 {
-	width: 25%;
+	width: 270px;
+	float: left;
 }
 
 #game
 {
-	width: 70%;
+	width: 90%;
+	float: left;
 }
 
 div.settingOption {
@@ -248,19 +245,6 @@ table.settingtable, .setting-input{
 	align-items: center;
 }
 
-/****GAME*****/
-.gameDiv {
-    padding: 15px 10px;/*box size*/
-    margin-right: 160px;
-    position: fixed;
-    /* Location in the box */
-    top: 5%;
-    left: 40px;
-    width: 1000px;
-    height: 100px;
-    visibility: hidden;
-}
-
 .Keys_in
 {
 	text-align: center;
@@ -323,4 +307,9 @@ table.settingtable, .setting-input{
 #ghost_number_display, #time_to_play_display, #balls_number_display, #lblScore, #lblusername
 {
 	text-align: center;
+}
+
+#lblusername
+{
+	font-size: 20px;
 }
