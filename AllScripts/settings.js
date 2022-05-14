@@ -169,22 +169,33 @@ function startPlay() {
     // update relevant fealds
     var balls_num = document.getElementById("num_of_balls").value;
     document.getElementById("balls_number_display").value = parseInt(balls_num);
+    balls_number_from_settings = parseInt(balls_num);
 
-    document.getElementById("ghost_number_display").value = getGhostsNum();
+    document.getElementById("ghost_number_display").value = document.getElementById("balls_number_display").value;
+    ghosts_number_from_settings = document.getElementById("ghost_number_display").value;
 
     time = document.getElementById("time").value;
     document.getElementById("time_to_play_display").value = time;
+    time_to_play_from_settings = time;
 
     document.getElementById("5pointsColor_display").style.backgroundColor = document.getElementById("5pointsColor").value;
+    pointsColor_from_settings_5 = document.getElementById("5pointsColor_display").style.backgroundColor;
 
     document.getElementById("15pointsColor_display").style.backgroundColor = document.getElementById("15pointsColor").value;
+    pointsColor_from_settings_15 = document.getElementById("15pointsColor_display").style.backgroundColor;
 
     document.getElementById("25pointsColor_display").style.backgroundColor = document.getElementById("25pointsColor").value;
+    pointsColor_from_settings_25 = document.getElementById("25pointsColor_display").style.backgroundColor;
 
     document.getElementById("left_key").value = BtnValues(leftBtn);
     document.getElementById("up_key").value = BtnValues(upBtn);
     document.getElementById("down_key").value = BtnValues(downBtn);
     document.getElementById("right_key").value = BtnValues(rightBtn);
+
+    key_left_from_settings = leftBtn;
+    key_up_from_settings = upBtn;
+    key_down_from_settings = downBtn;
+    key_right_from_settings = rightBtn;
 
     Start();
     changeDiv('GameDiv');

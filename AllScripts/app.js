@@ -6,6 +6,8 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+
+//media vars
 var game_background_music = new Audio('media/sound/game_sound.mp3');
 var pack_up = document.createElement('img');
 var pack_down = document.createElement('img');
@@ -24,6 +26,19 @@ ghost_1.src = 'media/ghosts/ghost_1.png';
 ghost_2.src = 'media/ghosts/ghost_2.png';
 ghost_3.src = 'media/ghosts/ghost_3.png';
 ghost_4.src = 'media/ghosts/ghost_4.png';
+
+// settings vars
+var balls_number_from_settings;
+var ghosts_number_from_settings;
+var time_to_play_from_settings;
+var pointsColor_from_settings_5;
+var pointsColor_from_settings_15;
+var pointsColor_from_settings_25;
+var key_left_from_settings;
+var key_up_from_settings;
+var key_down_from_settings;
+var key_right_from_settings;
+
 
 function StopMusic() { //todo - stop music when exiting the game
 	game_background_music.pause();
