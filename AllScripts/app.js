@@ -8,6 +8,7 @@ var time_elapsed;
 var interval;
 var key_pressed;
 var last_direction = 4;
+var pacman_lives = 5;
 
 //media vars
 var game_background_music = new Audio('media/sound/game_sound.mp3');
@@ -56,6 +57,10 @@ function resetGame() {
 	StopMusic();
 }
 
+function gameEnded(reason_to_end) {
+	resetGame();
+	gameOverOn(reason_to_end);
+}
 function Start() {
 	context = canvas.getContext("2d");
 	PlayMusic();
@@ -323,12 +328,13 @@ function UpdatePosition() {
 	time_elapsed = (currentTime - start_time) / 1000;
 	if(time_elapsed >= time_to_play_from_settings)
 	{
-		resetGame();
-		alert("time over!");
+		gameEnded('no_more_time_to_play');
 	}
 	if (score == total_score_value) {
-		resetGame();
-		window.alert("Game completed");
+		gameEnded('win_the_game');
+	}
+	if (pacman_lives == 0) {
+		gameEnded('no_more_lives');
 	} 
 	else {
 		Draw();

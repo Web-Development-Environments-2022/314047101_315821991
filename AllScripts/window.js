@@ -70,3 +70,49 @@ function aboutOff()
     const popupContainter = document.getElementById("dPopupContainer");
     popupContainter.style.display = "none";
 }
+
+function gameOverOn(game_end_reason)
+{
+    const popupContainter_gameOver = document.getElementById("dPopupContainer_endGame");
+    popupContainter_gameOver.style.display = "block";
+    document.getElementById("score_end_game_label").innerHTML = score;
+
+    var message;
+    switch (game_end_reason) {
+        case 'no_more_time_to_play':
+            if(score < 100)
+            {
+                message = "You are better than ";
+                message += score;
+                message += " points!"
+            }
+            else
+            {
+                message = "Winner!";
+            }
+            break;
+        case 'win_the_game':
+            message = "Winner!";
+            break;
+        case 'no_more_lives':
+            message = "Loser! You've run out of lives!";
+            break;
+        default:
+            message = ""; 
+    }
+    document.getElementById("message_end_game_label").innerHTML = message;
+}
+
+function gameOverOff(nextScreen)
+{
+    const popupContainter_gameOver = document.getElementById("dPopupContainer_endGame");
+    popupContainter_gameOver.style.display = "none";
+    if(nextScreen == 'play')
+    {
+        changeDiv('settingsDiv');
+    }
+    else if(nextScreen == 'home')
+    {
+        changeDiv('homeDiv');
+    }
+}

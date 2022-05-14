@@ -28,8 +28,7 @@
 		<br>
 		<div id="menuDiv">
 			<!-- todo delete -->
-			<!-- <li><button class="buttons" id="set_button" onclick="changeDiv('GameDiv')">game</button></li> 
-			<li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li> -->
+			<!-- <li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li> -->
 			<!-- todo delete -->
 			<li><button class="buttons" id="home_button" onclick="changeDiv('homeDiv')">HOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
@@ -49,8 +48,23 @@
 					<h2>In this game, we used Jquery in order to validate the registration form.</h2>
 					<br>
 					<h2>Difficulties we encountered with:<br>creating the modal window for the "about" section. 
-						How did we solve this eventually? We found in Google a tutorial video that demonstrates 
+						<br>How did we solve this eventually?<br>We found in Google a tutorial video that demonstrates 
 						how to do this step by step.</h2>
+				</div>
+			</div>
+
+			<div id="dPopupContainer_endGame" class="popupContainer_end_game">
+				<div id="dPopupContent_endGame" class="popupContent_end_game">
+					<h3>GAME OVER!</h3>
+					<label id="message_end_game_label" style="color: white; font-size: 20px;"></label>
+					<br>
+					<h2>Your score:</h2>
+					<label id="score_end_game_label" style="color: white;"></label>
+					<br><br>
+					<div id="end_game_button_div">
+						<button class="buttons_end_game" id="restart_game" style="margin-left: 10%;" onclick="gameOverOff('play')">PLAY AGAIN</button>
+						<button class="buttons_end_game" id="home_button_end_game" onclick="gameOverOff('home')">BACK HOME</button>
+					</div>
 				</div>
 			</div>
 
@@ -196,13 +210,13 @@
 								<!--row 2-->
 								<tr>
 									<td>
-										<input type="color" id="5pointsColor" name="5points" value="#60A2DD">
+										<input type="color" id="5pointsColor" name="5points" value="#C8A6DC">
 									</td>
 									<td style="padding-left: 15px">
-										<input type="color" id="15pointsColor" name="15points" value="#BB60DD">
+										<input type="color" id="15pointsColor" name="15points" value="#6BECE1">
 									</td>
 									<td style="padding-left: 15px">
-										<input type="color" id="25pointsColor" name="25points" value="#DD60BD">
+										<input type="color" id="25pointsColor" name="25points" value="#F12ACA">
 									</td>
 								</tr>
 							</table><!--color table-->
