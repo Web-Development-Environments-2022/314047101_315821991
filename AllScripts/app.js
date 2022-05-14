@@ -56,7 +56,7 @@ function Start() {
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 50;
+	var food_remain = balls_number_from_settings;
 	var pacman_remain = 1;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
@@ -93,10 +93,45 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
 	}
+	for (var i = 0; i < 10; i++) {
+		for (var j = 0; j < 10; j++) {
+			if(board[i][j] == 1)
+			{
+				options = new Array();
+				if(ballsNumber_5>0)
+				{
+					options.push(5);
+				}
+				if(ballsNumber_15>0)
+				{
+					options.push(15);
+				}
+				if(ballsNumber_25>0)
+				{
+					options.push(25);
+				}
+				var rand = options[~~(Math.random() * options.length)];
+				board[i][j] = rand;
+				if(rand ==5)
+				{
+					ballsNumber_5--;
+				}
+				else if(rand == 15)
+				{
+					ballsNumber_15--;
+				}
+				else
+				{
+					ballsNumber_25--;
+				}
+			}
+		}
+	}
 	keysDown = {};
 	addEventListener(
 		"keydown",
 		function(e) {
+			e.preventDefault();
 			keysDown[e.keyCode] = true;
 		},
 		false
@@ -108,7 +143,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 60);
+	interval = setInterval(UpdatePosition, 90);
 }
 
 function findRandomEmptyCell(board) {
@@ -122,16 +157,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[key_up_from_settings]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[key_down_from_settings]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[key_left_from_settings]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[key_right_from_settings]) {
 		return 4;
 	}
 	else
@@ -151,12 +186,26 @@ function Draw() {
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {
 				drawPlayer(center.x, center.y);
-			} else if (board[i][j] == 1) {
+			}
+			else if (board[i][j] == 5) {
 				context.beginPath();
 				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
 				context.fillStyle = pointsColor_from_settings_5; //color
 				context.fill();
-			} else if (board[i][j] == 4) {
+			}
+			else if (board[i][j] == 15) {
+				context.beginPath();
+				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
+				context.fillStyle = pointsColor_from_settings_15; //color
+				context.fill();
+			}
+			else if (board[i][j] == 25) {
+				context.beginPath();
+				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
+				context.fillStyle = pointsColor_from_settings_25; //color
+				context.fill();
+			}
+			else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "#937EA5"; //color
@@ -249,8 +298,14 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
-	if (board[shape.i][shape.j] == 1) {
-		score++;
+	if (board[shape.i][shape.j] == 5) {
+		score+=5;
+	}
+	if (board[shape.i][shape.j] == 15) {
+		score+=15;
+	}
+	if (board[shape.i][shape.j] == 25) {
+		score+=25;
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
