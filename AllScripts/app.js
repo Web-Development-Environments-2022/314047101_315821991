@@ -6,19 +6,40 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-var game_background_music = new Audio('media/game_sound.mp3');
+var game_background_music = new Audio('media/sound/game_sound.mp3');
+var pack_up = document.createElement('img');
+var pack_down = document.createElement('img');
+var pack_left = document.createElement('img');
+var pack_right = document.createElement('img');
+var ghost_1 = document.createElement('img');
+var ghost_2 = document.createElement('img');
+var ghost_3 = document.createElement('img');
+var ghost_4 = document.createElement('img');
+
+pack_up.src = 'media/packman_icons/packman_up.png';
+pack_down.src = 'media/packman_icons/packman_down.png';
+pack_left.src = 'media/packman_icons/packman_left.png';
+pack_right.src = 'media/packman_icons/packman_right.png';
+ghost_1.src = 'media/ghosts/ghost_1.png';
+ghost_2.src = 'media/ghosts/ghost_2.png';
+ghost_3.src = 'media/ghosts/ghost_3.png';
+ghost_4.src = 'media/ghosts/ghost_4.png';
 
 function StopMusic() { //todo - stop music when exiting the game
-	audio.pause();
+	game_background_music.pause();
+}
+
+
+function PlayMusic() { //todo - stop music when exiting the game
+	game_background_music.play();
 }
 
 $(document).ready(function() {
-	context = canvas.getContext("2d");
 	$("#homeDiv").show();
-	Start();
 });
 
 function Start() {
+	context = canvas.getContext("2d");
 	game_background_music.play();
 	board = new Array();
 	score = 0;
