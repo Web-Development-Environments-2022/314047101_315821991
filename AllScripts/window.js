@@ -10,12 +10,11 @@ function changeDiv(divName)
     {
         resetGame();
         StopMusic();
-        //document.getElementById("menuDiv").style.display = "block";
     }
-    // if(divName == "GameDiv")
-    // {
-    //     document.getElementById("menuDiv").style.display = "none";
-    // }
+    if(divName == "settingsDiv")
+    {
+        resetSettingsDiv();
+    }
     let windowTag = '#' + divName;
     $(".windowDivs").hide();
     $(windowTag).show();

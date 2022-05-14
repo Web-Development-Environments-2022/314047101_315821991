@@ -70,9 +70,30 @@ function getChoosenKey(key_type) {
         })
 }
 
+function resetSettingsDiv() {
+
+    resetKeys();
+
+    // reset ghost number
+    $('input[type=checkbox]').prop('checked', false);
+    document.getElementById("check1").checked = true;
+
+    document.getElementById("num_of_balls").value = 50;
+    document.getElementById("dynamic_balls").value = 50;
+        
+    document.getElementById("time").value = 60;
+    document.getElementById("dynamic_time").value = 60;
+
+    document.getElementById("5pointsColor").value = "#C8A6DC";
+
+    document.getElementById("15pointsColor").value = "#6BECE1";
+
+    document.getElementById("25pointsColor").value = "#F12ACA";
+}
+
 function setRandom() {
 
-    setRandomKey();
+    resetKeys();
 
     setRandomGhosts();
 
@@ -83,7 +104,7 @@ function setRandom() {
     setRandomColors();
 }
 
-function setRandomKey(){
+function resetKeys(){
     document.getElementById("leftKey").value = "⇦"
     leftBtn = 37;
     document.getElementById("upKey").value ="⇧"
@@ -125,7 +146,6 @@ function setRandomBalls(){
     let numOfBalls = Math.floor(Math.random() * (41) + 50);
     document.getElementById("num_of_balls").value = numOfBalls;
     document.getElementById("dynamic_balls").value = numOfBalls;
-
 }
 
 function setRandomColors(){
@@ -212,6 +232,6 @@ function startPlay() {
     key_down_from_settings = downBtn;
     key_right_from_settings = rightBtn;
 
-    Start();
     changeDiv('GameDiv');
+    Start();
 }
