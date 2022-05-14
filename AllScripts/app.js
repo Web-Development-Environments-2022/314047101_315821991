@@ -6,22 +6,16 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var key_pressed;
+var last_direction = 4;
 
 //media vars
 var game_background_music = new Audio('media/sound/game_sound.mp3');
-var pack_up = document.createElement('img');
-var pack_down = document.createElement('img');
-var pack_left = document.createElement('img');
-var pack_right = document.createElement('img');
 var ghost_1 = document.createElement('img');
 var ghost_2 = document.createElement('img');
 var ghost_3 = document.createElement('img');
 var ghost_4 = document.createElement('img');
 
-pack_up.src = 'media/packman_icons/packman_up.png';
-pack_down.src = 'media/packman_icons/packman_down.png';
-pack_left.src = 'media/packman_icons/packman_left.png';
-pack_right.src = 'media/packman_icons/packman_right.png';
 ghost_1.src = 'media/ghosts/ghost_1.png';
 ghost_2.src = 'media/ghosts/ghost_2.png';
 ghost_3.src = 'media/ghosts/ghost_3.png';
@@ -38,7 +32,6 @@ var key_left_from_settings;
 var key_up_from_settings;
 var key_down_from_settings;
 var key_right_from_settings;
-
 
 function StopMusic() { //todo - stop music when exiting the game
 	game_background_music.pause();
@@ -138,6 +131,10 @@ function GetKeyPressed() {
 	if (keysDown[39]) {
 		return 4;
 	}
+	else
+	{
+		return 0;
+	}
 }
 
 function Draw() {
@@ -150,15 +147,7 @@ function Draw() {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color; //color
-				context.fill();
-				context.beginPath();
-				context.arc(center.x + 5, center.y - 9, 2.5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
-				context.fill();
+				drawPlayer(center.x, center.y);
 			} else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
@@ -174,9 +163,69 @@ function Draw() {
 	}
 }
 
+function drawPlayer(centerX, centerY)
+{
+	context.beginPath();
+	if(last_direction == 1)
+	{
+		// packman goes up
+		context.arc(centerX, centerY, 15, 1.7 * Math.PI, 1.3 * Math.PI); // half circle		
+
+	}
+	else if(last_direction == 2)
+	{
+		// packman goes down
+		context.arc(centerX, centerY, 15, 0.7 * Math.PI, 0.3 * Math.PI); // half circle	
+	}
+	else if(last_direction == 3)
+	{
+		// packman goes left
+		context.arc(centerX, centerY, 15, 1.1 * Math.PI, 0.8 * Math.PI); // half circle	
+	}
+	else if(last_direction == 4)
+	{
+		// packman goes right
+		context.arc(centerX, centerY, 15, 0.1 * Math.PI, 1.8 * Math.PI); // half circle	
+	}
+
+	context.lineTo(centerX, centerY);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	context.beginPath();
+
+	if(last_direction == 1)
+	{
+		// packman goes up
+		context.arc(centerX + 10, centerY + 2, 2.5, 0, 2 * Math.PI); // circle
+
+	}
+	else if(last_direction == 2)
+	{
+		// packman goes down
+		context.arc(centerX - 10, centerY + 2, 2.5, 0, 2 * Math.PI); // circle
+	}
+	else if(last_direction == 3)
+	{
+		// packman goes left
+		context.arc(centerX - 5, centerY - 9, 2.5, 0, 2 * Math.PI); // circle
+	}
+	else if(last_direction == 4)
+	{
+		// packman goes right
+		context.arc(centerX + 5, centerY - 9, 2.5, 0, 2 * Math.PI); // circle
+	}
+
+	context.fillStyle = "black"; //color
+	context.fill();
+}
+
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
+	if(x != 0)
+	{
+		last_direction = x;
+	}
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
@@ -203,9 +252,6 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
 	if (score == 50) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
