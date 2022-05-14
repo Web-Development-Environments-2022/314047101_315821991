@@ -170,6 +170,14 @@ function startPlay() {
     var balls_num = document.getElementById("num_of_balls").value;
     document.getElementById("balls_number_display").value = parseInt(balls_num);
     balls_number_from_settings = parseInt(balls_num);
+    ballsNumber_5 = Math.floor(balls_number_from_settings * 0.6);
+    ballsNumber_15 = Math.floor(balls_number_from_settings * 0.3);
+    ballsNumber_25 = Math.floor(balls_number_from_settings * 0.1);
+
+    if(ballsNumber_5 + ballsNumber_15 + ballsNumber_25 < balls_number_from_settings)
+    {
+        ballsNumber_5 = balls_number_from_settings - ballsNumber_25 - ballsNumber_15
+    }
 
     document.getElementById("ghost_number_display").value = document.getElementById("balls_number_display").value;
     ghosts_number_from_settings = document.getElementById("ghost_number_display").value;
@@ -180,12 +188,15 @@ function startPlay() {
 
     document.getElementById("5pointsColor_display").style.backgroundColor = document.getElementById("5pointsColor").value;
     pointsColor_from_settings_5 = document.getElementById("5pointsColor_display").style.backgroundColor;
+    document.getElementById("5pointsColor_display").value = ballsNumber_5;
 
     document.getElementById("15pointsColor_display").style.backgroundColor = document.getElementById("15pointsColor").value;
     pointsColor_from_settings_15 = document.getElementById("15pointsColor_display").style.backgroundColor;
+    document.getElementById("15pointsColor_display").value = ballsNumber_15;
 
     document.getElementById("25pointsColor_display").style.backgroundColor = document.getElementById("25pointsColor").value;
     pointsColor_from_settings_25 = document.getElementById("25pointsColor_display").style.backgroundColor;
+    document.getElementById("25pointsColor_display").value = ballsNumber_25;
 
     document.getElementById("left_key").value = BtnValues(leftBtn);
     document.getElementById("up_key").value = BtnValues(upBtn);

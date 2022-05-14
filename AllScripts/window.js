@@ -16,7 +16,7 @@ function LoginUser()
 {
     let user_name = document.getElementById("UserNameLogin").value;
     let password = document.getElementById("PasswordLogin").value;
-    if(user_name in localStorage)
+    if(localStorage.getItem(user_name) != null)
     {
         if(localStorage.getItem(user_name) == password)
         {

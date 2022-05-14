@@ -23,11 +23,14 @@ ghost_4.src = 'media/ghosts/ghost_4.png';
 
 // settings vars
 var balls_number_from_settings;
-var ghosts_number_from_settings;
-var time_to_play_from_settings;
+var ballsNumber_5;
+var ballsNumber_15;
+var ballsNumber_25;
 var pointsColor_from_settings_5;
 var pointsColor_from_settings_15;
 var pointsColor_from_settings_25;
+var ghosts_number_from_settings;
+var time_to_play_from_settings;
 var key_left_from_settings;
 var key_up_from_settings;
 var key_down_from_settings;
@@ -151,7 +154,7 @@ function Draw() {
 			} else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
-				context.fillStyle = "white"; //color
+				context.fillStyle = pointsColor_from_settings_5; //color
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
