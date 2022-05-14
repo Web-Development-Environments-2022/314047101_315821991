@@ -26,6 +26,7 @@ var balls_number_from_settings;
 var ballsNumber_5;
 var ballsNumber_15;
 var ballsNumber_25;
+var total_score_value;
 var pointsColor_from_settings_5;
 var pointsColor_from_settings_15;
 var pointsColor_from_settings_25;
@@ -36,12 +37,13 @@ var key_up_from_settings;
 var key_down_from_settings;
 var key_right_from_settings;
 
-function StopMusic() { //todo - stop music when exiting the game
+function StopMusic() {
 	game_background_music.pause();
+	game_background_music.currentTime = 0
 }
 
 
-function PlayMusic() { //todo - stop music when exiting the game
+function PlayMusic() {
 	game_background_music.play();
 }
 
@@ -49,9 +51,15 @@ $(document).ready(function() {
 	$("#homeDiv").show();
 });
 
+function resetGame() {
+	window.clearInterval(interval);
+	StopMusic();
+}
+
 function Start() {
 	context = canvas.getContext("2d");
 	PlayMusic();
+	total_score_value = (5 * ballsNumber_5) + (15 * ballsNumber_15) + (25 * ballsNumber_25); 
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -131,7 +139,10 @@ function Start() {
 	addEventListener(
 		"keydown",
 		function(e) {
-			e.preventDefault();
+			if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
+			{
+				e.preventDefault();
+			}
 			keysDown[e.keyCode] = true;
 		},
 		false
@@ -310,10 +321,16 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score == 50) {
-		window.clearInterval(interval);
+	if(time_elapsed >= time_to_play_from_settings)
+	{
+		resetGame();
+		alert("time over!");
+	}
+	if (score == total_score_value) {
+		resetGame();
 		window.alert("Game completed");
-	} else {
+	} 
+	else {
 		Draw();
 	}
 }

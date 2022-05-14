@@ -27,8 +27,10 @@
 		<br>
 		<br>
 		<div id="menuDiv">
-			<!-- <li><button class="buttons" id="set_button" onclick="changeDiv('GameDiv')">game</button></li> -->
-			<li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li>
+			<!-- todo delete -->
+			<!-- <li><button class="buttons" id="set_button" onclick="changeDiv('GameDiv')">game</button></li> 
+			<li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li> -->
+			<!-- todo delete -->
 			<li><button class="buttons" id="home_button" onclick="changeDiv('homeDiv')">HOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
 			<li><button class="buttons" id="login_button" onclick="changeDiv('loginDiv')">LOGIN</button></li>
@@ -238,6 +240,24 @@
 						<td>
 							<div id="settings_display">
 								<form id="settingDisplayForm" name="settingDisplayForm">
+									<div id="gameProgressDisplay">
+										<h3>Game Progress:</h3>
+										<table class="gameDisplay">
+											<tr>
+												<th style="padding-left: 15px"><label for="lblScore">SCORE:</label></th>
+												<th style="padding-left: 15px"><label for="lblTime">TIME:</label></th>
+											</tr>
+											<tr>
+												<td style="padding-left: 15px">
+													<input id="lblScore" type="text" />
+												</td>
+												<td style="padding-left: 15px">
+													<input id="lblTime" style="text-align: center" type="text" />
+												</td>
+											</tr>
+										</table>
+									</div>
+									<br>
 									<h3>Settings</h3>
 									<label for="lblusername" style="display: inline-block;line-height: 0.7; font-size: 15px;">Player:</label>
 									<input id="lblusername" type="text"/>
@@ -309,31 +329,11 @@
 											</tr>
 										</table><!--color table-->
 									</div> <!--end color-->
-							
 									<div>
 										<div>
 											<p style="display: inline-block;line-height: 0.7; font-size: 15px;">Time To Play (in seconds):</p>
 											<input id="time_to_play_display" type="text" readonly="readonly"/>
 										</div> 				
-									</div>
-									<br>
-							
-									<div id="gameProgressDisplay">
-										<p sstyle="display: inline-block;line-height: 0.7; font-size: 15px;">Game Progress:</p>
-										<table class="gameDisplay">
-											<tr>
-												<th style="padding-left: 15px"><label for="lblScore">SCORE:</label></th>
-												<th style="padding-left: 15px"><label for="lblTime">TIME:</label></th>
-											</tr>
-											<tr>
-												<td style="padding-left: 15px">
-													<input id="lblScore" type="text" />
-												</td>
-												<td style="padding-left: 15px">
-													<input id="lblTime" style="text-align: center" type="text" />
-												</td>
-											</tr>
-										</table>
 									</div>
 									<br>
 									</form>
@@ -345,8 +345,8 @@
 							</div>
 							<br>
 							<br>
-							<button class="buttons" id="settings_button" style="margin-left: 10%;" onclick="changeDiv('settingsDiv')">RESET SETTINGS</button>
-							<h2 style="margin-left: 10%;">This action will reset the game too..</h2>
+							<button class="buttons" id="settings_button" style="margin-left: 10%;" onclick="changeDiv('settingsDiv')">CHANGE SETTINGS</button>
+							<h2 style="margin-left: 10%;">* This action will reset the game too..</h2>
 						</td>
 					</tr>
 				</table>

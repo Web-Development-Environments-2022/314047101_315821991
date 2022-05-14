@@ -6,6 +6,16 @@ $(document).ready(function(){
 
 function changeDiv(divName)
 {
+    if(document.getElementById("GameDiv").style.display == "block")
+    {
+        resetGame();
+        StopMusic();
+        //document.getElementById("menuDiv").style.display = "block";
+    }
+    // if(divName == "GameDiv")
+    // {
+    //     document.getElementById("menuDiv").style.display = "none";
+    // }
     let windowTag = '#' + divName;
     $(".windowDivs").hide();
     $(windowTag).show();
