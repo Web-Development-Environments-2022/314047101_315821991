@@ -150,8 +150,8 @@ function Draw() {
 				drawPlayer(center.x, center.y);
 			} else if (board[i][j] == 1) {
 				context.beginPath();
-				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
+				context.fillStyle = "white"; //color
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
@@ -168,23 +168,23 @@ function drawPlayer(centerX, centerY)
 	context.beginPath();
 	if(last_direction == 1)
 	{
-		// packman goes up
+		// pacman goes up
 		context.arc(centerX, centerY, 15, 1.7 * Math.PI, 1.3 * Math.PI); // half circle		
 
 	}
 	else if(last_direction == 2)
 	{
-		// packman goes down
+		// pacman goes down
 		context.arc(centerX, centerY, 15, 0.7 * Math.PI, 0.3 * Math.PI); // half circle	
 	}
 	else if(last_direction == 3)
 	{
-		// packman goes left
+		// pacman goes left
 		context.arc(centerX, centerY, 15, 1.1 * Math.PI, 0.8 * Math.PI); // half circle	
 	}
 	else if(last_direction == 4)
 	{
-		// packman goes right
+		// pacman goes right
 		context.arc(centerX, centerY, 15, 0.1 * Math.PI, 1.8 * Math.PI); // half circle	
 	}
 
@@ -195,23 +195,23 @@ function drawPlayer(centerX, centerY)
 
 	if(last_direction == 1)
 	{
-		// packman goes up
+		// pacman goes up
 		context.arc(centerX + 10, centerY + 2, 2.5, 0, 2 * Math.PI); // circle
 
 	}
 	else if(last_direction == 2)
 	{
-		// packman goes down
+		// pacman goes down
 		context.arc(centerX - 10, centerY + 2, 2.5, 0, 2 * Math.PI); // circle
 	}
 	else if(last_direction == 3)
 	{
-		// packman goes left
+		// pacman goes left
 		context.arc(centerX - 5, centerY - 9, 2.5, 0, 2 * Math.PI); // circle
 	}
 	else if(last_direction == 4)
 	{
-		// packman goes right
+		// pacman goes right
 		context.arc(centerX + 5, centerY - 9, 2.5, 0, 2 * Math.PI); // circle
 	}
 
