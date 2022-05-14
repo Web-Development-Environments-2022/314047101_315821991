@@ -27,9 +27,6 @@
 		<br>
 		<br>
 		<div id="menuDiv">
-			<!-- todo delete -->
-			<!-- <li><button class="buttons" id="set_button" onclick="changeDiv('settingsDiv')">set</button></li> -->
-			<!-- todo delete -->
 			<li><button class="buttons" id="home_button" onclick="changeDiv('homeDiv')">HOME</button></li>
 			<li><button class="buttons" id="register_button" onclick="changeDiv('registerDiv')">REGISTER</button></li>
 			<li><button class="buttons" id="login_button" onclick="changeDiv('loginDiv')">LOGIN</button></li>
@@ -77,6 +74,7 @@
 			</div>
 
 			<div id="registerDiv" class="windowDivs">
+				<h1>Register</h1>
 				<form id="registrationForm" name="registration">
 
 					<label for="UserName">User Name</label>
@@ -101,9 +99,13 @@
 				
 					<button type="submit">Save</button>	
 				  </form>
+				  <br>
+				  <h2>Please, Join Us!</h2>
+				  <br><br>
 			</div>
 
 			<div id="loginDiv" class="windowDivs">
+				<h1>LOGIN</h1>
 				<form id="loginForm" name="login">
 					<label for="UserName">User Name</label>
 					<input type="text" name="UserName" id="UserNameLogin" class="FormInput" placeholder="Enter user name.." required/>
@@ -114,6 +116,9 @@
 					<br>
 					<button type="submit" onclick="LoginUser()">Login</button>
 				  </form>
+				  <br>
+				<h2>We're so happy to see you again!!</h2>
+				<br>
 			</div>
 
 			<div id="settingsDiv" class="windowDivs">
