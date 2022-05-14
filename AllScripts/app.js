@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 function Start() {
 	context = canvas.getContext("2d");
-	game_background_music.play();
+	PlayMusic();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
