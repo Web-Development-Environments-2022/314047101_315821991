@@ -191,7 +191,32 @@ function GetKeyPressed() {
 	}
 }
 
+function drawLives()
+{
+	if(pacman_lives < 5)
+	{
+		document.getElementById("pacman_lives_display_5").style.display = "none";
+	}
+	if(pacman_lives < 4)
+	{
+		document.getElementById("pacman_lives_display_4").style.display = "none";
+	}
+	if(pacman_lives < 3)
+	{
+		document.getElementById("pacman_lives_display_3").style.display = "none";
+	}
+	if(pacman_lives < 2)
+	{
+		document.getElementById("pacman_lives_display_2").style.display = "none";
+	}
+	if(pacman_lives < 1)
+	{
+		document.getElementById("pacman_lives_display_1").style.display = "none";
+	}
+}
+
 function Draw() {
+	drawLives();
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
@@ -328,7 +353,6 @@ function UpdatePosition() {
 		score+=25;
 	}
 	board[shape.i][shape.j] = 2;
-	Draw();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if(time_elapsed >= time_to_play_from_settings)
@@ -341,7 +365,7 @@ function UpdatePosition() {
 	if (pacman_lives == 0) {
 		gameEnded('no_more_lives');
 	} 
-	// else {
-	// 	Draw();
-	// }
+	else {
+		Draw();
+	}
 }
