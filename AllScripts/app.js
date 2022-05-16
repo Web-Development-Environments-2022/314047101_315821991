@@ -294,6 +294,10 @@ function UpdatePosition() {
 	{
 		last_direction = x;
 	}
+	else
+	{
+		x = last_direction;
+	}
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
@@ -324,6 +328,7 @@ function UpdatePosition() {
 		score+=25;
 	}
 	board[shape.i][shape.j] = 2;
+	Draw();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if(time_elapsed >= time_to_play_from_settings)
@@ -336,7 +341,7 @@ function UpdatePosition() {
 	if (pacman_lives == 0) {
 		gameEnded('no_more_lives');
 	} 
-	else {
-		Draw();
-	}
+	// else {
+	// 	Draw();
+	// }
 }
