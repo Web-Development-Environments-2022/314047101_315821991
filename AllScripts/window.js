@@ -87,11 +87,11 @@ function gameOverOn(game_end_reason)
             }
             else
             {
-                message = "Winner!";
+                message = "You've run out of time, but you'r still a Winner!";
             }
             break;
         case 'win_the_game':
-            message = "Winner!";
+            message = "Winner! You'r the best!";
             break;
         case 'no_more_lives':
             message = "Loser! You've run out of lives!";
