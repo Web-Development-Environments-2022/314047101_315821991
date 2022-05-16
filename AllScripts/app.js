@@ -9,7 +9,7 @@ var interval;
 var key_pressed;
 var last_direction = 4;
 var pacman_lives = 5;
-
+let board_wo_ghost;
 //media vars
 var game_background_music = new Audio('media/sound/game_sound.mp3');
 var ghost_1 = document.createElement('img');
@@ -21,6 +21,14 @@ ghost_1.src = 'media/ghosts/ghost_1.png';
 ghost_2.src = 'media/ghosts/ghost_2.png';
 ghost_3.src = 'media/ghosts/ghost_3.png';
 ghost_4.src = 'media/ghosts/ghost_4.png';
+
+
+let ghostList = [ghost_1, ghost_2,ghost_3,ghost_4]
+let corners = [ [0,0],[0,9],[9,0],[9,9]  ]
+let ghostNumFromUser;
+let ghost_count = 0;
+let ghostPosition;
+let ghostInterval;
 
 // settings vars
 var balls_number_from_settings;
@@ -65,7 +73,18 @@ function Start() {
 	context = canvas.getContext("2d");
 	PlayMusic();
 	total_score_value = (5 * ballsNumber_5) + (15 * ballsNumber_15) + (25 * ballsNumber_25); 
+
+	window.clearInterval(ghostInterval);
+
+	ghostInterval = 350;
+	let ghost_remain = ghostNumFromUser;
+	
+	ghost_count = 0;
+	ghostPosition = [];
+
 	board = new Array();
+	board_wo_ghost = new Array();
+
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
@@ -74,6 +93,7 @@ function Start() {
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
+		board_wo_ghost[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
 			if (
@@ -81,6 +101,8 @@ function Start() {
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
+				(i == 9 && j == 0) ||
+				(i == 2 && j == 1) ||
 				(i == 6 && j == 2)
 			) {
 				board[i][j] = 4;
@@ -99,8 +121,23 @@ function Start() {
 				}
 				cnt--;
 			}
+			board_wo_ghost[i][j] = board[i][j]
 		}
 	}
+
+	//adding ghosts
+
+	while (ghost_remain > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 7 ;
+		ghostPosition.push(emptyCell)
+		ghost_remain--;
+		
+	}
+	ghost_interval = setInterval(update_ghost,200);
+	new_position_for_ghosts();
+
+
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
@@ -252,8 +289,172 @@ function Draw() {
 				context.fillStyle = "#937EA5"; //color
 				context.fill();
 			}
+			else if (board[i][j] == 7) {
+				context.beginPath();
+				context.drawImage(ghost_1, center.x-20 , center.y-20 , 50, 50);
+				context.fill();
+				if (ghost_count == ghostNumFromUser-1){
+					ghost_count = 0
+				}
+				else
+				{
+					ghost_count++
+				}
+			}
 		}
 	}
+}
+
+function draw_ghost(center) {
+	context.beginPath();
+	context.drawImage(ghost_1, center.x-20 , center.y-20 , 50, 50);
+	context.fill();
+
+	// TODO: WTF
+	if (ghost_count == ghostNumFromUser-1){
+		ghost_count = 0
+	}
+	else {
+		ghost_count++
+	}
+}
+function new_position_for_ghosts(){
+	let i = 0
+	for (i = 0; i < ghostNumFromUser; i++){
+		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0
+		ghostPosition[i][0] = corners[i][0]
+		ghostPosition[i][1] = corners[i][1]
+
+		board[corners[i][0]][corners[i][1]] = 7
+	}
+	var emptyCell = findRandomEmptyCell(board);
+	board[shape.i][shape.j] = 0
+	board_wo_ghost[shape.i][shape.j] = 0
+	shape.i = emptyCell[0]
+	shape.j = emptyCell[1]
+	board[shape.i][shape.j] = 2
+	board_wo_ghost[shape.i][shape.j] = 2
+	Draw();
+}
+
+function update_ghost() {
+
+	var i;
+	for (i = 0; i < ghostNumFromUser; i++){
+		if (board[ghostPosition[i][0]][ghostPosition[i][1]] == 2 ) {
+			GhostEatPacman();
+			break;
+		}
+		let GhostX = ghostPosition[i][0];
+		let GhostY = ghostPosition[i][1];
+		
+		let direction = chooseDirection(GhostX , GhostY);
+
+		// TODO: not sure what this is
+		if (board_wo_ghost[ghostPosition[i][0]][ghostPosition[i][1]] != 7){
+			board[ghostPosition[i][0]][ghostPosition[i][1]] = board_wo_ghost[ghostPosition[i][0]][ghostPosition[i][1]];
+		}
+		else{
+			board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
+		}
+
+		if (direction == "up") {
+			ghostPosition[i][1] = ghostPosition[i][1] - 1;
+		}
+		if (direction == "down") {
+			ghostPosition[i][1] = ghostPosition[i][1] + 1;
+		}
+		if (direction == "left") {
+			ghostPosition[i][0] = ghostPosition[i][0] - 1;
+		}
+		if (direction == "right") {
+			ghostPosition[i][0] = ghostPosition[i][0] + 1;
+		}
+
+		board[ghostPosition[i][0]][ghostPosition[i][1]] = 7;
+	}
+
+	Draw();
+	
+}
+function validStep(ghostX, ghostY){
+	if (ghostX < 0 || ghostX > 9 || ghostY < 0  || ghostX > 9){
+		return false;
+	}
+
+	board_value = board[ghostX][ghostY]
+
+	if (board_value == 4 || board_value == 7){
+		return false
+	}
+
+	return true
+}
+
+
+function calcDistance(ghostX, ghostY){
+	return Math.abs(shape.i - ghostX) + Math.abs(shape.j - ghostY)
+}
+
+
+function chooseDirection(ghostA, ghostB){
+		let direction;	
+		let distance;
+		let minimalDistance = 100;
+		
+		let randPos = Math.random();
+		let validSteps = []
+
+		// down
+		if (validStep(ghostA, ghostB+1)){
+			validSteps.push("down");
+			distance = calcDistance(ghostA, ghostB+1);
+
+			if (distance < minimalDistance){
+				minimalDistance = distance;
+				direction = "down"
+			}
+		}
+
+		// up
+		if (validStep(ghostA, ghostB-1)){
+			validSteps.push("up");
+			distance = calcDistance(ghostA, ghostB-1);
+
+			if (distance < minimalDistance){
+				minimalDistance = distance;
+				direction = "up"
+			}
+		}
+		
+
+		// right
+		if (validStep(ghostA+1, ghostB)){
+				validSteps.push("right");
+				distance = calcDistance(ghostA+1, ghostB);
+		
+				if (distance < minimalDistance){
+					minimalDistance = distance;
+					direction = "right"
+					}
+				}
+		
+		// left
+		if (validStep(ghostA-1, ghostB)){
+			validSteps.push("left");
+			distance = calcDistance(ghostA-1, ghostB);
+
+			if (distance < minimalDistance){
+				minimalDistance = distance;
+				direction = "left"
+			}
+		}
+
+		if (randPos > 0.75){
+			direction = validSteps[Math.floor(Math.random() * validSteps.length)]
+		}
+
+		return direction
 }
 
 function drawPlayer(centerX, centerY)
@@ -352,9 +553,16 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 25) {
 		score+=25;
 	}
+	var cell_value = board[shape.i][shape.j];
+
 	board[shape.i][shape.j] = 2;
+	board_wo_ghost[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+	if (cell_value == 7) {
+		GhostEatPacman();
+	}
+	Draw();
 	if(time_elapsed >= time_to_play_from_settings)
 	{
 		gameEnded('no_more_time_to_play');
@@ -368,4 +576,11 @@ function UpdatePosition() {
 	else {
 		Draw();
 	}
+}
+
+function GhostEatPacman(){
+	score = score -10
+	dr = pacman_lives - 1
+	drawLives();
+	new_position_for_ghosts();
 }
