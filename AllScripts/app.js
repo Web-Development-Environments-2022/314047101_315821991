@@ -7,6 +7,7 @@ var start_time;
 var time_elapsed;
 var interval;
 var ghost_interval;
+var gift_interval;
 var key_pressed;
 var last_direction;
 var pacman_lives;
@@ -47,6 +48,10 @@ clock.src = 'media/alarm.png';
 var pill = document.createElement('img');
 pill.src = 'media/pill.png';
 
+//gift variables
+var gift = document.createElement('img');
+gift.src = 'media/gift.png';
+
 
 
 function StopMusic() {
@@ -65,6 +70,8 @@ $(document).ready(function() {
 function resetGame() {
 	window.clearInterval(interval);
 	window.clearInterval(ghost_interval);
+	window.clearInterval(gift_interval);
+
 	StopMusic();
 }
 
@@ -79,6 +86,7 @@ function Start() {
 	document.getElementById("pacman_lives_display").src = "media/lives/live_5.jpeg";
 	context = canvas.getContext("2d");
 	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
+	gift_current_position = [5,5];
 	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
 //	PlayMusic();
 	total_score_value = (5 * ballsNumber_5) + (15 * ballsNumber_15) + (25 * ballsNumber_25); 
@@ -206,8 +214,11 @@ function Start() {
 		ghosts_board[index_x][index_y] = 22; // 22 marks ghosts position
 	
 	}
+	board[gift_current_position[0]][gift_current_position[1]] = 33;
 	interval = setInterval(UpdatePosition, 150);
 	ghost_interval = setInterval(UpdateGhosts, 450);
+	gift_interval = setInterval(UpdateGift,2500);
+
 
 }
 
@@ -312,8 +323,18 @@ function Draw() {
 			if (ghosts_board[i][j] == 22) { //draw ghosts
 				context.drawImage(ghost_1, center.x-17 , center.y-17 , 40, 40);
 			}
+			if (board[i][j] == 33) { //draw ghosts
+				context.drawImage(gift, center.x-17 , center.y-17 , 40, 40);
+			}
 		}
 	}
+}
+
+function UpdateGift(){
+	var valid=findRandomEmptyCell(board);
+	board[gift_current_position[0]][gift_current_position[1]]=0;
+	gift_current_position=[valid[0],valid[1]];
+	board[gift_current_position[0]][gift_current_position[1]] = 33;
 }
 
 function UpdateGhosts() {
@@ -531,6 +552,7 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
+	
 
 	let board_last_value = board[shape.i][shape.j];
 	board[shape.i][shape.j] = 2;
@@ -544,6 +566,7 @@ function UpdatePosition() {
 	if (cell_value == 22) {
 		GhostEatPacman();
 	}
+
 	else
 	{
 		if (board_last_value == 5) {
@@ -558,6 +581,9 @@ function UpdatePosition() {
 		if (board_last_value == 66) {
 			time_to_play_from_settings=time_to_play_from_settings*2;
 			document.getElementById("time_to_play_display").value = time_to_play_from_settings;
+		}
+		if (board_last_value == 33) {
+			score+=50;
 		}
 		if (board_last_value == 99) {
 			if(pacman_lives==5){
@@ -579,6 +605,8 @@ function UpdatePosition() {
 			pacman_lives+=1;
 		}
 	}
+	
+
 
 	Draw();
 
