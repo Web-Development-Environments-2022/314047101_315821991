@@ -302,10 +302,10 @@ function Draw() {
 				context.fill();
 			}
 			else if (board[i][j] == 66) {
-				context.drawImage(clock, center.x-10 , center.y+8 ,  8*Math.PI, 8* Math.PI);
+				context.drawImage(clock, center.x-10 , center.y-10 ,  8*Math.PI, 8* Math.PI);
 			}
 			else if (board[i][j] == 99) {
-				context.drawImage(pill, center.x-10 , center.y+8 ,  8*Math.PI, 8* Math.PI);
+				context.drawImage(pill, center.x-10 , center.y-10 ,  8*Math.PI, 8* Math.PI);
 
 			}
 			
@@ -586,7 +586,18 @@ function GhostEatPacman(){
 }
 
 function resetGhosts(){
+	for (var i = 0; i < ghosts_number_from_settings; i++) {
+		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = 0; // reset ghosts
+	
+	}
+	
 	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
 	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
-	let ghosts_board;
+	
+	for (var i = 0; i < ghosts_number_from_settings; i++) {
+		index_x = ghosts_current_positions[i][0];
+		index_y = ghosts_current_positions[i][1];
+		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = 22; // reset ghosts
+	
+	}
 }
