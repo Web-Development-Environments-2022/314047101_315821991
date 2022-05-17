@@ -88,7 +88,7 @@ function Start() {
 	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
 	gift_current_position = [5,5];
 	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
-//	PlayMusic();
+	PlayMusic();
 	total_score_value = (5 * ballsNumber_5) + (15 * ballsNumber_15) + (25 * ballsNumber_25); 
 
 	board = new Array();
@@ -216,7 +216,7 @@ function Start() {
 	}
 	board[gift_current_position[0]][gift_current_position[1]] = 33;
 	interval = setInterval(UpdatePosition, 150);
-	ghost_interval = setInterval(UpdateGhosts, 450);
+	ghost_interval = setInterval(UpdateGhosts, 600);
 	gift_interval = setInterval(UpdateGift,2500);
 
 
