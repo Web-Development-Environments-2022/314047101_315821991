@@ -112,7 +112,7 @@ function Start() {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
-					board[i][j] = 1; //todo - make sure pacman isn't on ghosts if we have time
+					board[i][j] = 1;
 					ghosts_board[i][j] = 1;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
@@ -404,7 +404,7 @@ function find_neighbords_distances(neighbords){
 	return neighbords_distance;
 }
 
-function choose_next_step(ghostX, ghostY, last_ghost_x, last_ghost_y){ //todo implelemt
+function choose_next_step(ghostX, ghostY, last_ghost_x, last_ghost_y){
 	possible_steps = find_neighbords(ghostX, ghostY, last_ghost_x, last_ghost_y);
 	possible_steps_distances = find_neighbords_distances(possible_steps);
 
