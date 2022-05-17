@@ -59,6 +59,18 @@ $(document).ready(function() {
 function resetGame() {
 	window.clearInterval(interval);
 	StopMusic();
+	last_direction = 4;
+	pacman_lives = 5;
+	resetDrawLives();
+}
+
+function resetDrawLives()
+{
+	document.getElementById("pacman_lives_display_5").style.display = "block";
+	document.getElementById("pacman_lives_display_4").style.display = "block";
+	document.getElementById("pacman_lives_display_4").style.display = "block";
+	document.getElementById("pacman_lives_display_3").style.display = "block";
+	document.getElementById("pacman_lives_display_1").style.display = "block";
 }
 
 function gameEnded(reason_to_end) {
