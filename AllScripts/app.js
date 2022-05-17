@@ -398,7 +398,7 @@ function find_neighbords(ghostX, ghostY, last_ghost_x, last_ghost_y){
 
 function isValid(positionX,positionY, last_ghost_x, last_ghost_y){
 	//return true is the index value is not a wall, ghost or out of board
-	if(positionX == last_ghost_x &&  positionX == last_ghost_y) // prevent loop
+	if(positionX == last_ghost_x &&  positionY == last_ghost_y) // prevent loop
 	{
 		return false;
 	}
@@ -426,28 +426,48 @@ function find_neighbords_distances(neighbords){
 }
 
 function choose_next_step(ghost_current_x, ghost_current_y, last_ghost_x, last_ghost_y){
-	//todo naama
 	directions=["U","D","R","L"];
 
 	possible_steps = find_neighbords(ghost_current_x, ghost_current_y, last_ghost_x, last_ghost_y);
 
-	if(ghost_current_x == 2 && ghost_current_y < 6 && ghost_current_y > 2 && shape.i == 3 && shape.j < 6 && shape.j > 2)
+	//  ----------- prevent loops ----------- 
+	if(ghost_current_x == 2 && ghost_current_y < 7 && ghost_current_y > 1 && shape.i > 3 && shape.j < 6 && shape.j > 2)
 	{
-		// prevent loop near obstacle - 1 - go down if possible
-		if(neighbords[1].length != 0)
+		// prevent loop from the left to obstacle 1 - go down if possible
+		if(possible_steps[1].length != 0)
 		{
 			return directions[1];
 		}
 	}
 
-	if(ghost_current_x == 6 && ghost_current_y < 3 && ghost_current_y > 0 && shape.i == 6 && shape.j < 3 && shape.j > 0)
+	if(ghost_current_x == 4 && ghost_current_y < 7 && ghost_current_y > 1 && shape.i < 3 && shape.j < 6 && shape.j > 2)
 	{
-		// prevent loop near obstacle - 2 - go down if possible
-		if(neighbords[1].length != 0)
+		// prevent loop from the right to obstacle 1 - go down if possible
+		if(possible_steps[1].length != 0)
 		{
 			return directions[1];
 		}
 	}
+
+	if(ghost_current_x == 5 && ghost_current_y < 2 && ghost_current_y >= 0 && shape.i > 6 && shape.j < 3 && shape.j > 0)
+	{
+		// prevent loop from the left to obstacle 2 - go down if possible
+		if(possible_steps[1].length != 0)
+		{
+			return directions[1];
+		}
+	}
+
+	if(ghost_current_x == 7 && ghost_current_y < 2 && ghost_current_y >= 0 && shape.i < 6 && shape.j < 3 && shape.j > 0)
+	{
+		// prevent loop from the right to obstacle 2 - go down if possible
+		if(possible_steps[1].length != 0)
+		{
+			return directions[1];
+		}
+	}
+
+	//  ----------- finish prevent loops ----------- 
 
 	possible_steps_distances = find_neighbords_distances(possible_steps);
 
