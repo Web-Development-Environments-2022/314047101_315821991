@@ -60,6 +60,18 @@ $(document).ready(function() {
 function resetGame() {
 	window.clearInterval(interval);
 	StopMusic();
+	last_direction = 4;
+	pacman_lives = 5;
+	resetDrawLives();
+}
+
+function resetDrawLives()
+{
+	document.getElementById("pacman_lives_display_5").style.display = "block";
+	document.getElementById("pacman_lives_display_4").style.display = "block";
+	document.getElementById("pacman_lives_display_4").style.display = "block";
+	document.getElementById("pacman_lives_display_3").style.display = "block";
+	document.getElementById("pacman_lives_display_1").style.display = "block";
 }
 
 function gameEnded(reason_to_end) {
@@ -470,7 +482,6 @@ function drawPlayer(centerX, centerY)
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
-
 	
 	var x = GetKeyPressed();
 	if(x != 0)
@@ -552,6 +563,8 @@ function GhostEatPacman(){
 	score -= 10;
 	pacman_lives -= 1;
 	var emptyCell = findRandomEmptyCell(board);
+	shape.i = emptyCell[0];
+	shape.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = 2;
 }
 
