@@ -60,18 +60,6 @@ $(document).ready(function() {
 function resetGame() {
 	window.clearInterval(interval);
 	StopMusic();
-	last_direction = 4;
-	pacman_lives = 5;
-	resetDrawLives();
-}
-
-function resetDrawLives()
-{
-	document.getElementById("pacman_lives_display_5").style.display = "block";
-	document.getElementById("pacman_lives_display_4").style.display = "block";
-	document.getElementById("pacman_lives_display_4").style.display = "block";
-	document.getElementById("pacman_lives_display_3").style.display = "block";
-	document.getElementById("pacman_lives_display_1").style.display = "block";
 }
 
 function gameEnded(reason_to_end) {
@@ -82,6 +70,7 @@ function gameEnded(reason_to_end) {
 function Start() {
 	last_direction = 4;
 	pacman_lives = 5;
+	document.getElementById("pacman_lives_display").src = "media/lives/live_5.jpeg";
 	context = canvas.getContext("2d");
 	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
 	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
@@ -245,23 +234,23 @@ function drawLives()
 {
 	if(pacman_lives < 5)
 	{
-		document.getElementById("pacman_lives_display_5").style.display = "none";
+		document.getElementById("pacman_lives_display").src = "media/lives/live_4.jpeg";
 	}
 	if(pacman_lives < 4)
 	{
-		document.getElementById("pacman_lives_display_4").style.display = "none";
+		document.getElementById("pacman_lives_display").src = "media/lives/live_3.jpeg";
 	}
 	if(pacman_lives < 3)
 	{
-		document.getElementById("pacman_lives_display_3").style.display = "none";
+		document.getElementById("pacman_lives_display").src = "media/lives/live_2.jpeg";
 	}
 	if(pacman_lives < 2)
 	{
-		document.getElementById("pacman_lives_display_2").style.display = "none";
+		document.getElementById("pacman_lives_display").src = "media/lives/live_1.jpeg";
 	}
 	if(pacman_lives < 1)
 	{
-		document.getElementById("pacman_lives_display_1").style.display = "none";
+		document.getElementById("pacman_lives_display").src = "media/lives/live_0.jpeg";
 	}
 }
 

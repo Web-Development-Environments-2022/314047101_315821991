@@ -307,7 +307,7 @@ table.settingtable, .setting-input{
 	height: 100%;
 	position: fixed;
 	background: rgba(0, 0, 0, 0.7);
-	padding-top: 20%;
+	padding-top: 10%;
 	z-index: 1;
 	overflow: auto;
 }
@@ -315,7 +315,7 @@ table.settingtable, .setting-input{
 .popupContent_end_game
 {
 	background: url("media/about_back.jpg");
-	height: 52%;
+	height: 55%;
 	width: 30%;
 	margin: auto;
 	padding: 10px;
