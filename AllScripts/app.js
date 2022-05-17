@@ -39,9 +39,10 @@ let ghosts_last_positions;
 
 
 //clock variables
-var clock= new Image();
-clock.src = 'media/ghosts/alarm.png';
-var clock_obj; // in board = 66
+var clock = document.createElement('img');
+
+clock.src = 'media/alarm.png';
+
 
 function StopMusic() {
 	game_background_music.pause();
@@ -120,6 +121,7 @@ function Start() {
 			}
 		}
 	}
+	
 
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -163,6 +165,8 @@ function Start() {
 		}
 
 	}
+	var emptyCellForClock = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 66;
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -285,6 +289,9 @@ function Draw() {
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "#937EA5"; //color
 				context.fill();
+			}
+			else if (board[i][j] == 66) {
+				context.drawImage(clock, center.x-10 , center.y+8 ,  8*Math.PI, 8* Math.PI);
 			}
 			
 			if (ghosts_board[i][j] == 22) { //draw ghosts
@@ -517,6 +524,12 @@ function UpdatePosition() {
 		}
 		if (board_last_value == 25) {
 			score+=25;
+		}
+		if (board_last_value == 66) {
+			time_to_play_from_settings=time_to_play_from_settings*2;
+			document.getElementById("time_to_play_display").value = time_to_play_from_settings;
+
+
 		}
 	}
 
