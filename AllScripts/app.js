@@ -567,28 +567,3 @@ function GhostEatPacman(){
 	shape.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = 2;
 }
-
-// //todo: implement clock function
-// function checktime_elapsed(){
-// 	var current_time = new Date();
-// 	if (!clock_obj.ate){
-// 		if ((current_time - time_elapsed)/1000 >= 10 && clock_obj.onBorad){
-// 			board[clock_obj.i][clock_obj.j] = 0;
-
-// 			clock_obj.j = 0;
-// 			clock_obj.i = 0;
-			
-// 			clock_obj.onBorad = false;
-// 			time_elapsed = current_time;
-// 		}
-// 		else if  ((current_time - time_elapsed)/1000 >= 10 && !clock_obj.onBorad ){
-
-// 			var emptyCell = findRandomEmptyCell(board);
-// 			clock_obj.i = emptyCell[0];
-// 			clock_obj.j = emptyCell[1];
-// 			board[clock_obj.i][clock_obj.j] = 66; // clock value on board would be 66
-// 			clock_obj.onBorad = true;
-// 			time_elapsed = current_time;
-// 		}
-// 	}
-// }
