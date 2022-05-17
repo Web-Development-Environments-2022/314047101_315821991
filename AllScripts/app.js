@@ -404,8 +404,30 @@ function find_neighbords_distances(neighbords){
 	return neighbords_distance;
 }
 
-function choose_next_step(ghostX, ghostY, last_ghost_x, last_ghost_y){
-	possible_steps = find_neighbords(ghostX, ghostY, last_ghost_x, last_ghost_y);
+function choose_next_step(ghost_current_x, ghost_current_y, last_ghost_x, last_ghost_y){
+	//todo naama
+	directions=["U","D","R","L"];
+
+	possible_steps = find_neighbords(ghost_current_x, ghost_current_y, last_ghost_x, last_ghost_y);
+
+	if(ghost_current_x == 2 && ghost_current_y < 6 && ghost_current_y > 2 && shape.i == 3 && shape.j < 6 && shape.j > 2)
+	{
+		// prevent loop near obstacle - 1 - go down if possible
+		if(neighbords[1].length != 0)
+		{
+			return directions[1];
+		}
+	}
+
+	if(ghost_current_x == 6 && ghost_current_y < 3 && ghost_current_y > 0 && shape.i == 6 && shape.j < 3 && shape.j > 0)
+	{
+		// prevent loop near obstacle - 2 - go down if possible
+		if(neighbords[1].length != 0)
+		{
+			return directions[1];
+		}
+	}
+
 	possible_steps_distances = find_neighbords_distances(possible_steps);
 
 	var best_step=Infinity;
@@ -417,8 +439,6 @@ function choose_next_step(ghostX, ghostY, last_ghost_x, last_ghost_y){
 			index=i;
 		}
 	}	
-
-	directions=["U","D","R","L"];
 	return directions[index]; //return the chosen step by the distances 
 
 }
