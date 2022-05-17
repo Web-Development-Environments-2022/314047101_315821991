@@ -2,9 +2,9 @@
 # Pacman Game
 
 Naama Baruch: 315821991 & Talya Sakov: 314047101  <br/><br/>
-URL to the game:<br/><br/>
+<ins>URL to the game: </ins><br/><br/>
 
-The functionality we added to the maze is:
+<ins>The functionality we added to the maze is:</ins>
 - A clock that adds 2 times the playing time, from the start time.
 - Pill that adds more life to the existing state of life.
 
