@@ -6,6 +6,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var ghost_interval;
 var key_pressed;
 var last_direction;
 var pacman_lives;
@@ -63,6 +64,7 @@ $(document).ready(function() {
 
 function resetGame() {
 	window.clearInterval(interval);
+	window.clearInterval(ghost_interval);
 	StopMusic();
 }
 
@@ -172,10 +174,10 @@ function Start() {
 	}
 	//add one clock
 	var emptyCellForClock = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = 66;
+	board[emptyCellForClock[0]][emptyCellForClock[1]] = 66;
 	//add one pill
 	var emptyCellForPill = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = 99;
+	board[emptyCellForPill[0]][emptyCellForPill[1]] = 99;
 
 
 	keysDown = {};
@@ -204,7 +206,8 @@ function Start() {
 		ghosts_board[index_x][index_y] = 22; // 22 marks ghosts position
 	
 	}
-	interval = setInterval(UpdatePosition, 200);
+	interval = setInterval(UpdatePosition, 150);
+	ghost_interval = setInterval(UpdateGhosts, 450);
 
 }
 
@@ -512,7 +515,7 @@ function UpdatePosition() {
 	let board_last_value = board[shape.i][shape.j];
 	board[shape.i][shape.j] = 2;
 
-	UpdateGhosts();
+	//UpdateGhosts();
 
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
