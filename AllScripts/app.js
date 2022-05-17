@@ -463,7 +463,6 @@ function drawPlayer(centerX, centerY)
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
-
 	
 	var x = GetKeyPressed();
 	if(x != 0)
@@ -539,6 +538,8 @@ function GhostEatPacman(){
 	score -= 10;
 	pacman_lives -= 1;
 	var emptyCell = findRandomEmptyCell(board);
+	shape.i = emptyCell[0];
+	shape.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = 2;
 }
 
