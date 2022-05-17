@@ -9,26 +9,12 @@ var interval;
 var key_pressed;
 var last_direction = 4;
 var pacman_lives = 5;
-let board_wo_ghost;
+
 //media vars
 var game_background_music = new Audio('media/sound/game_sound.mp3');
 var ghost_1 = document.createElement('img');
-var ghost_2 = document.createElement('img');
-var ghost_3 = document.createElement('img');
-var ghost_4 = document.createElement('img');
 
 ghost_1.src = 'media/ghosts/ghost_1.png';
-ghost_2.src = 'media/ghosts/ghost_2.png';
-ghost_3.src = 'media/ghosts/ghost_3.png';
-ghost_4.src = 'media/ghosts/ghost_4.png';
-
-
-let ghostList = [ghost_1, ghost_2,ghost_3,ghost_4]
-let corners = [ [0,0],[0,9],[9,0],[9,9]  ]
-let ghostNumFromUser;
-let ghost_count = 0;
-let ghostPosition;
-let ghostInterval;
 
 // settings vars
 var balls_number_from_settings;
@@ -39,18 +25,27 @@ var total_score_value;
 var pointsColor_from_settings_5;
 var pointsColor_from_settings_15;
 var pointsColor_from_settings_25;
-var ghosts_number_from_settings;
 var time_to_play_from_settings;
 var key_left_from_settings;
 var key_up_from_settings;
 var key_down_from_settings;
 var key_right_from_settings;
 
+//ghosts variables 
+var ghosts_number_from_settings;
+let ghosts_board;
+let ghosts_current_positions;
+
+
+//clock variables
+var clock= new Image();
+clock.src = 'media/ghosts/alarm.png';
+var clock_obj; // in board = 66
+
 function StopMusic() {
 	game_background_music.pause();
 	game_background_music.currentTime = 0
 }
-
 
 function PlayMusic() {
 	game_background_music.play();
@@ -69,21 +64,16 @@ function gameEnded(reason_to_end) {
 	resetGame();
 	gameOverOn(reason_to_end);
 }
+
 function Start() {
 	context = canvas.getContext("2d");
-	PlayMusic();
+	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
+//	PlayMusic();
 	total_score_value = (5 * ballsNumber_5) + (15 * ballsNumber_15) + (25 * ballsNumber_25); 
 
-	window.clearInterval(ghostInterval);
-
-	ghostInterval = 350;
-	let ghost_remain = ghostNumFromUser;
-	
-	ghost_count = 0;
-	ghostPosition = [];
-
 	board = new Array();
-	board_wo_ghost = new Array();
+	ghosts_board = new Array();
+
 
 	score = 0;
 	pac_color = "yellow";
@@ -91,9 +81,10 @@ function Start() {
 	var food_remain = balls_number_from_settings;
 	var pacman_remain = 1;
 	start_time = new Date();
+	//clock_obj = new Object();//todo: add this here 
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
-		board_wo_ghost[i] = new Array();
+		ghosts_board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
 			if (
@@ -101,46 +92,35 @@ function Start() {
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
-				(i == 9 && j == 0) ||
-				(i == 2 && j == 1) ||
 				(i == 6 && j == 2)
 			) {
 				board[i][j] = 4;
+				ghosts_board[i][j] = 4;
 			} else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
-					board[i][j] = 1;
+					board[i][j] = 1; //todo - make sure pacman isn't on ghosts if we have time
+					ghosts_board[i][j] = 1;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
 					board[i][j] = 2;
+					ghosts_board[i][j] = 2;
 				} else {
 					board[i][j] = 0;
+					ghosts_board[i][j] = 0;
 				}
 				cnt--;
 			}
-			board_wo_ghost[i][j] = board[i][j]
 		}
 	}
-
-	//adding ghosts
-
-	while (ghost_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 7 ;
-		ghostPosition.push(emptyCell)
-		ghost_remain--;
-		
-	}
-	ghost_interval = setInterval(update_ghost,200);
-	new_position_for_ghosts();
-
 
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
+		ghosts_board[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
 	}
 	for (var i = 0; i < 10; i++) {
@@ -162,6 +142,7 @@ function Start() {
 				}
 				var rand = options[~~(Math.random() * options.length)];
 				board[i][j] = rand;
+				ghosts_board[i][j] = rand;
 				if(rand ==5)
 				{
 					ballsNumber_5--;
@@ -176,6 +157,7 @@ function Start() {
 				}
 			}
 		}
+
 	}
 	keysDown = {};
 	addEventListener(
@@ -196,7 +178,18 @@ function Start() {
 		},
 		false
 	);
+
+
+	// clock_obj.onBoard = false; //todo: what is object?? 
+	// clock_obj.ate = false;
+	for (var i = 0; i < ghosts_number_from_settings; i++) {
+		index_x = ghosts_current_positions[i][0];
+		index_y = ghosts_current_positions[i][1];
+		ghosts_board[index_x][index_y] = 22; // 22 marks ghosts position
+	
+	}
 	interval = setInterval(UpdatePosition, 200);
+
 }
 
 function findRandomEmptyCell(board) {
@@ -289,172 +282,116 @@ function Draw() {
 				context.fillStyle = "#937EA5"; //color
 				context.fill();
 			}
-			else if (board[i][j] == 7) {
-				context.beginPath();
-				context.drawImage(ghost_1, center.x-20 , center.y-20 , 50, 50);
-				context.fill();
-				if (ghost_count == ghostNumFromUser-1){
-					ghost_count = 0
-				}
-				else
-				{
-					ghost_count++
-				}
+			
+			if (ghosts_board[i][j] == 22) { //draw ghosts
+				context.drawImage(ghost_1, center.y , center.x , 40, 40);
+				// context.beginPath();
+				// context.arc(center.y, center.x, 6, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "red"; //color
+				// context.fill();
 			}
 		}
 	}
 }
 
-function draw_ghost(center) {
-	context.beginPath();
-	context.drawImage(ghost_1, center.x-20 , center.y-20 , 50, 50);
-	context.fill();
-
-	// TODO: WTF
-	if (ghost_count == ghostNumFromUser-1){
-		ghost_count = 0
-	}
-	else {
-		ghost_count++
-	}
-}
-function new_position_for_ghosts(){
-	let i = 0
-	for (i = 0; i < ghostNumFromUser; i++){
-		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0
-		ghostPosition[i][0] = corners[i][0]
-		ghostPosition[i][1] = corners[i][1]
-
-		board[corners[i][0]][corners[i][1]] = 7
-	}
-	var emptyCell = findRandomEmptyCell(board);
-	board[shape.i][shape.j] = 0
-	board_wo_ghost[shape.i][shape.j] = 0
-	shape.i = emptyCell[0]
-	shape.j = emptyCell[1]
-	board[shape.i][shape.j] = 2
-	board_wo_ghost[shape.i][shape.j] = 2
-	Draw();
-}
-
-function update_ghost() {
+function UpdateGhosts() {
 
 	var i;
-	for (i = 0; i < ghostNumFromUser; i++){
-		if (board[ghostPosition[i][0]][ghostPosition[i][1]] == 2 ) {
-			GhostEatPacman();
-			break;
-		}
-		let GhostX = ghostPosition[i][0];
-		let GhostY = ghostPosition[i][1];
+	for (i = 0; i < ghosts_number_from_settings; i++){
 		
-		let direction = chooseDirection(GhostX , GhostY);
+		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]]; 
+		
+		let direction = choose_next_step(ghosts_current_positions[i][0] , ghosts_current_positions[i][1]);
 
-		// TODO: not sure what this is
-		if (board_wo_ghost[ghostPosition[i][0]][ghostPosition[i][1]] != 7){
-			board[ghostPosition[i][0]][ghostPosition[i][1]] = board_wo_ghost[ghostPosition[i][0]][ghostPosition[i][1]];
+		if (direction == "U") {
+			ghosts_current_positions[i][0] -= 1;
 		}
-		else{
-			board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
+		else if (direction == "D") {
+			ghosts_current_positions[i][0] += 1;
 		}
-
-		if (direction == "up") {
-			ghostPosition[i][1] = ghostPosition[i][1] - 1;
+		else if (direction == "L") {
+			ghosts_current_positions[i][1] -= 1;
 		}
-		if (direction == "down") {
-			ghostPosition[i][1] = ghostPosition[i][1] + 1;
-		}
-		if (direction == "left") {
-			ghostPosition[i][0] = ghostPosition[i][0] - 1;
-		}
-		if (direction == "right") {
-			ghostPosition[i][0] = ghostPosition[i][0] + 1;
+		else if (direction == "R") {
+			ghosts_current_positions[i][1] += 1;
 		}
 
-		board[ghostPosition[i][0]][ghostPosition[i][1]] = 7;
+		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = 22;
 	}
+}
 
-	Draw();
+function find_neighbords(ghostX, ghostY){ //todo implelemt
+	// find all possible steps : check four direction
+	// return array of possible neighbords, if the step is not valid, will add an empty list
+
+	possible_neighbords=new Array();
+	if(isValid(ghostX-1,ghostY))
+		possible_neighbords.push([ghostX-1,ghostY]);
+	else
+		possible_neighbords.push([]);
+
+	if(isValid(ghostX+1,ghostY))
+		possible_neighbords.push([ghostX+1,ghostY]);
+	else
+		possible_neighbords.push([]);
+
+	if(isValid(ghostX,ghostY-1))
+		possible_neighbords.push([ghostX,ghostY-1]);
+	else
+		possible_neighbords.push([]);
+
+	if(isValid(ghostX,ghostY+1))
+		possible_neighbords.push([ghostX,ghostY+1]);
+	else
+		possible_neighbords.push([]);
+
+
+	return possible_neighbords;	 //possible_neighbords= [[UP],[DOWN],[RIGHT],[LEFT]]
 	
 }
-function validStep(ghostX, ghostY){
-	if (ghostX < 0 || ghostX > 9 || ghostY < 0  || ghostX > 9){
+
+function isValid(positionX,positionY){
+	//return true is the index value is not a wall, ghost or out of board
+	if(positionX<0 || positionY<0 ||  positionX > 9||  positionY > 9)
+	{
 		return false;
 	}
+	if (ghosts_board[positionX][positionY]==22 || board[positionX][positionY]== 4)
+		return false;	
+	return true;	
+}
 
-	board_value = board[ghostX][ghostY]
+function find_neighbords_distances(neighbords){ 
+	// return for each neighbor it's distance from pacman
+	neighbords_distance=new Array();
 
-	if (board_value == 4 || board_value == 7){
-		return false
+	for (var i=0; i < 4; i++){
+		if(neighbords[i].length == 0)// if the step were not valid, the there will be an emtpy list.
+			neighbords_distance.push(Infinity); //if the step were not valid, than put infinity as the distance value.
+		else{
+			calculate_distance=Math.abs(shape.i-neighbords[i][0])+Math.abs(shape.j-neighbords[i][1]);
+			neighbords_distance.push(calculate_distance);}		
 	}
-
-	return true
+	return neighbords_distance;
 }
 
+function choose_next_step(ghostX, ghostY){ //todo implelemt
+	possible_steps = find_neighbords(ghostX, ghostY);
+	possible_steps_distances = find_neighbords_distances(possible_steps);
 
-function calcDistance(ghostX, ghostY){
-	return Math.abs(shape.i - ghostX) + Math.abs(shape.j - ghostY)
-}
+	var best_step=Infinity;
+	var index;
 
-
-function chooseDirection(ghostA, ghostB){
-		let direction;	
-		let distance;
-		let minimalDistance = 100;
-		
-		let randPos = Math.random();
-		let validSteps = []
-
-		// down
-		if (validStep(ghostA, ghostB+1)){
-			validSteps.push("down");
-			distance = calcDistance(ghostA, ghostB+1);
-
-			if (distance < minimalDistance){
-				minimalDistance = distance;
-				direction = "down"
-			}
+	for (var i=0; i<possible_steps_distances.length; i++){ //iretate over all possible steps, and pick the smallest, save it index
+		if (possible_steps_distances[i]<best_step){
+			best_step=possible_steps_distances[i];
+			index=i;
 		}
+	}	
 
-		// up
-		if (validStep(ghostA, ghostB-1)){
-			validSteps.push("up");
-			distance = calcDistance(ghostA, ghostB-1);
+	res=["U","D","R","L"];
+	return res[index]; //return the chosen step by the distances 
 
-			if (distance < minimalDistance){
-				minimalDistance = distance;
-				direction = "up"
-			}
-		}
-		
-
-		// right
-		if (validStep(ghostA+1, ghostB)){
-				validSteps.push("right");
-				distance = calcDistance(ghostA+1, ghostB);
-		
-				if (distance < minimalDistance){
-					minimalDistance = distance;
-					direction = "right"
-					}
-				}
-		
-		// left
-		if (validStep(ghostA-1, ghostB)){
-			validSteps.push("left");
-			distance = calcDistance(ghostA-1, ghostB);
-
-			if (distance < minimalDistance){
-				minimalDistance = distance;
-				direction = "left"
-			}
-		}
-
-		if (randPos > 0.75){
-			direction = validSteps[Math.floor(Math.random() * validSteps.length)]
-		}
-
-		return direction
 }
 
 function drawPlayer(centerX, centerY)
@@ -515,6 +452,8 @@ function drawPlayer(centerX, centerY)
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
+
+	
 	var x = GetKeyPressed();
 	if(x != 0)
 	{
@@ -544,25 +483,34 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
-	if (board[shape.i][shape.j] == 5) {
-		score+=5;
-	}
-	if (board[shape.i][shape.j] == 15) {
-		score+=15;
-	}
-	if (board[shape.i][shape.j] == 25) {
-		score+=25;
-	}
-	var cell_value = board[shape.i][shape.j];
 
+	let board_last_value = board[shape.i][shape.j];
 	board[shape.i][shape.j] = 2;
-	board_wo_ghost[shape.i][shape.j] = 2;
+
+	UpdateGhosts();
+
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (cell_value == 7) {
+
+	var cell_value = ghosts_board[shape.i][shape.j];
+	if (cell_value == 22) {
 		GhostEatPacman();
 	}
+	else
+	{
+		if (board_last_value == 5) {
+			score+=5;
+		}
+		if (board_last_value == 15) {
+			score+=15;
+		}
+		if (board_last_value == 25) {
+			score+=25;
+		}
+	}
+
 	Draw();
+
 	if(time_elapsed >= time_to_play_from_settings)
 	{
 		gameEnded('no_more_time_to_play');
@@ -573,14 +521,36 @@ function UpdatePosition() {
 	if (pacman_lives == 0) {
 		gameEnded('no_more_lives');
 	} 
-	else {
-		Draw();
-	}
 }
 
 function GhostEatPacman(){
-	score = score -10
-	dr = pacman_lives - 1
-	drawLives();
-	new_position_for_ghosts();
+	score -= 10;
+	pacman_lives -= 1;
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 2;
 }
+
+// //todo: implement clock function
+// function checktime_elapsed(){
+// 	var current_time = new Date();
+// 	if (!clock_obj.ate){
+// 		if ((current_time - time_elapsed)/1000 >= 10 && clock_obj.onBorad){
+// 			board[clock_obj.i][clock_obj.j] = 0;
+
+// 			clock_obj.j = 0;
+// 			clock_obj.i = 0;
+			
+// 			clock_obj.onBorad = false;
+// 			time_elapsed = current_time;
+// 		}
+// 		else if  ((current_time - time_elapsed)/1000 >= 10 && !clock_obj.onBorad ){
+
+// 			var emptyCell = findRandomEmptyCell(board);
+// 			clock_obj.i = emptyCell[0];
+// 			clock_obj.j = emptyCell[1];
+// 			board[clock_obj.i][clock_obj.j] = 66; // clock value on board would be 66
+// 			clock_obj.onBorad = true;
+// 			time_elapsed = current_time;
+// 		}
+// 	}
+// }
