@@ -5,10 +5,10 @@
 <ins>URL to the game: </ins><br/><br/>
 
 <ins>The functionality we added to the maze is:</ins>
-- A clock that adds 2 times the playing time, from the start time.
-- Pill that adds more life to the existing state of life.
+- A clock Which doubles the initial game time once eaten by the Pacman.
+- Pill that adds more life to the existing state of life once eaten by the Pacman.
 
-Naama Baruch: 315821991 
+Naama Baruch: 315821991  <br/>
 Talya Sakov: 314047101
 
 
