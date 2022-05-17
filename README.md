@@ -2,7 +2,7 @@
 # Pacman Game
 
 
-<ins>URL to the game: </ins><br/><br/>
+<ins>URL to the game: https://web-development-environments-2022.github.io/314047101_315821991/ </ins><br/><br/>
 
 <ins>The functionality we added to the maze is:</ins>
 - A clock Which doubles the initial game time once eaten by the Pacman.
