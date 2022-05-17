@@ -7,8 +7,8 @@ var start_time;
 var time_elapsed;
 var interval;
 var key_pressed;
-var last_direction = 4;
-var pacman_lives = 5;
+var last_direction;
+var pacman_lives;
 
 //media vars
 var game_background_music = new Audio('media/sound/game_sound.mp3');
@@ -67,6 +67,8 @@ function gameEnded(reason_to_end) {
 }
 
 function Start() {
+	last_direction = 4;
+	pacman_lives = 5;
 	context = canvas.getContext("2d");
 	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
 	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
