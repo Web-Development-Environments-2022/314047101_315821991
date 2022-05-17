@@ -40,8 +40,12 @@ let ghosts_last_positions;
 
 //clock variables
 var clock = document.createElement('img');
-
 clock.src = 'media/alarm.png';
+
+//pill variables
+var pill = document.createElement('img');
+pill.src = 'media/pill.png';
+
 
 
 function StopMusic() {
@@ -87,7 +91,7 @@ function Start() {
 	var food_remain = balls_number_from_settings;
 	var pacman_remain = 1;
 	start_time = new Date();
-	//clock_obj = new Object();//todo: add this here 
+
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		ghosts_board[i] = new Array();
@@ -166,8 +170,14 @@ function Start() {
 		}
 
 	}
+	//add one clock
 	var emptyCellForClock = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = 66;
+	//add one pill
+	var emptyCellForPill = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 99;
+
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -188,9 +198,6 @@ function Start() {
 		false
 	);
 
-
-	// clock_obj.onBoard = false; //todo: what is object?? 
-	// clock_obj.ate = false;
 	for (var i = 0; i < ghosts_number_from_settings; i++) {
 		index_x = ghosts_current_positions[i][0];
 		index_y = ghosts_current_positions[i][1];
@@ -293,6 +300,10 @@ function Draw() {
 			}
 			else if (board[i][j] == 66) {
 				context.drawImage(clock, center.x-10 , center.y+8 ,  8*Math.PI, 8* Math.PI);
+			}
+			else if (board[i][j] == 99) {
+				context.drawImage(pill, center.x-10 , center.y+8 ,  8*Math.PI, 8* Math.PI);
+
 			}
 			
 			if (ghosts_board[i][j] == 22) { //draw ghosts
@@ -528,8 +539,25 @@ function UpdatePosition() {
 		if (board_last_value == 66) {
 			time_to_play_from_settings=time_to_play_from_settings*2;
 			document.getElementById("time_to_play_display").value = time_to_play_from_settings;
-
-
+		}
+		if (board_last_value == 99) {
+			if(pacman_lives==5){
+				document.getElementById("pacman_lives_display").src = "media/lives/live_6.png";
+			}
+			else if(pacman_lives==4){
+				document.getElementById("pacman_lives_display").src = "media/lives/live_5.jpeg";
+			}
+			else if(pacman_lives==3){
+				document.getElementById("pacman_lives_display").src = "media/lives/live_4.jpeg";
+			}
+			else if(pacman_lives==2){
+				document.getElementById("pacman_lives_display").src = "media/lives/live_3.jpeg";
+			}
+			else if(pacman_lives==1){
+				document.getElementById("pacman_lives_display").src = "media/lives/live_2.jpeg";
+			}
+			
+			pacman_lives+=1;
 		}
 	}
 
