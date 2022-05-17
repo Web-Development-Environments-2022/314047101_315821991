@@ -16,7 +16,7 @@ var pacman_lives;
 var game_background_music = new Audio('media/sound/game_sound.mp3');
 var ghost_1 = document.createElement('img');
 
-ghost_1.src = 'media/ghosts/ghost_1.png';
+ghost_1.src = 'media/ghosts/ghost_4.png';
 
 // settings vars
 var balls_number_from_settings;
@@ -120,7 +120,7 @@ function Start() {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
-					board[i][j] = 1; //todo - make sure pacman isn't on ghosts if we have time
+					board[i][j] = 1;
 					ghosts_board[i][j] = 1;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
@@ -313,10 +313,10 @@ function Draw() {
 				context.fill();
 			}
 			else if (board[i][j] == 66) {
-				context.drawImage(clock, center.x-10 , center.y+8 ,  8*Math.PI, 8* Math.PI);
+				context.drawImage(clock, center.x-10 , center.y-10 ,  8*Math.PI, 8* Math.PI);
 			}
 			else if (board[i][j] == 99) {
-				context.drawImage(pill, center.x-10 , center.y+8 ,  8*Math.PI, 8* Math.PI);
+				context.drawImage(pill, center.x-10 , center.y-10 ,  8*Math.PI, 8* Math.PI);
 
 			}
 			
@@ -425,7 +425,7 @@ function find_neighbords_distances(neighbords){
 	return neighbords_distance;
 }
 
-function choose_next_step(ghostX, ghostY, last_ghost_x, last_ghost_y){ //todo implelemt
+function choose_next_step(ghostX, ghostY, last_ghost_x, last_ghost_y){
 	possible_steps = find_neighbords(ghostX, ghostY, last_ghost_x, last_ghost_y);
 	possible_steps_distances = find_neighbords_distances(possible_steps);
 
@@ -610,4 +610,22 @@ function GhostEatPacman(){
 	shape.i = emptyCell[0];
 	shape.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = 2;
+	resetGhosts();
+}
+
+function resetGhosts(){
+	for (var i = 0; i < ghosts_number_from_settings; i++) {
+		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = 0; // reset ghosts
+	
+	}
+	
+	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
+	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
+	
+	for (var i = 0; i < ghosts_number_from_settings; i++) {
+		index_x = ghosts_current_positions[i][0];
+		index_y = ghosts_current_positions[i][1];
+		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = 22; // reset ghosts
+	
+	}
 }
