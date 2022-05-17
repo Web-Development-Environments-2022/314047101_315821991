@@ -14,7 +14,7 @@ var pacman_lives;
 var game_background_music = new Audio('media/sound/game_sound.mp3');
 var ghost_1 = document.createElement('img');
 
-ghost_1.src = 'media/ghosts/ghost_1.png';
+ghost_1.src = 'media/ghosts/ghost_4.png';
 
 // settings vars
 var balls_number_from_settings;
@@ -579,4 +579,11 @@ function GhostEatPacman(){
 	shape.i = emptyCell[0];
 	shape.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = 2;
+	resetGhosts();
+}
+
+function resetGhosts(){
+	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
+	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
+	let ghosts_board;
 }
