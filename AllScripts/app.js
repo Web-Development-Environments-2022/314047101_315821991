@@ -35,6 +35,7 @@ var key_right_from_settings;
 var ghosts_number_from_settings;
 let ghosts_board;
 let ghosts_current_positions;
+let ghosts_last_positions;
 
 
 //clock variables
@@ -68,6 +69,7 @@ function gameEnded(reason_to_end) {
 function Start() {
 	context = canvas.getContext("2d");
 	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
+	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
 //	PlayMusic();
 	total_score_value = (5 * ballsNumber_5) + (15 * ballsNumber_15) + (25 * ballsNumber_25); 
 
@@ -284,11 +286,11 @@ function Draw() {
 			}
 			
 			if (ghosts_board[i][j] == 22) { //draw ghosts
-				context.drawImage(ghost_1, center.y , center.x , 40, 40);
-				// context.beginPath();
-				// context.arc(center.y, center.x, 6, 0, 2 * Math.PI); // circle
-				// context.fillStyle = "red"; //color
-				// context.fill();
+				//context.drawImage(ghost_1, center.x , center.y , 40, 40);
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = "red"; //color
+				context.fill();
 			}
 		}
 	}
@@ -301,47 +303,50 @@ function UpdateGhosts() {
 		
 		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]]; 
 		
-		let direction = choose_next_step(ghosts_current_positions[i][0] , ghosts_current_positions[i][1]);
+		let next_step = choose_next_step(ghosts_current_positions[i][0] , ghosts_current_positions[i][1], ghosts_last_positions[i][0], ghosts_last_positions[i][1]);
 
-		if (direction == "U") {
-			ghosts_current_positions[i][0] -= 1;
-		}
-		else if (direction == "D") {
-			ghosts_current_positions[i][0] += 1;
-		}
-		else if (direction == "L") {
+		ghosts_last_positions[i][0] = ghosts_current_positions[i][0];
+		ghosts_last_positions[i][1] = ghosts_current_positions[i][1];
+
+		if (next_step == "U") {
 			ghosts_current_positions[i][1] -= 1;
 		}
-		else if (direction == "R") {
+		else if (next_step == "D") {
 			ghosts_current_positions[i][1] += 1;
+		}
+		else if (next_step == "R") {
+			ghosts_current_positions[i][0] += 1;
+		}
+		else if (next_step == "L") {
+			ghosts_current_positions[i][0] -= 1;
 		}
 
 		ghosts_board[ghosts_current_positions[i][0]][ghosts_current_positions[i][1]] = 22;
 	}
 }
 
-function find_neighbords(ghostX, ghostY){ //todo implelemt
+function find_neighbords(ghostX, ghostY, last_ghost_x, last_ghost_y){
 	// find all possible steps : check four direction
 	// return array of possible neighbords, if the step is not valid, will add an empty list
 
 	possible_neighbords=new Array();
-	if(isValid(ghostX-1,ghostY))
-		possible_neighbords.push([ghostX-1,ghostY]);
-	else
-		possible_neighbords.push([]);
-
-	if(isValid(ghostX+1,ghostY))
-		possible_neighbords.push([ghostX+1,ghostY]);
-	else
-		possible_neighbords.push([]);
-
-	if(isValid(ghostX,ghostY-1))
+	if(isValid(ghostX,ghostY-1, last_ghost_x, last_ghost_y)) // up
 		possible_neighbords.push([ghostX,ghostY-1]);
 	else
 		possible_neighbords.push([]);
 
-	if(isValid(ghostX,ghostY+1))
+	if(isValid(ghostX,ghostY+1, last_ghost_x, last_ghost_y)) // down
 		possible_neighbords.push([ghostX,ghostY+1]);
+	else
+		possible_neighbords.push([]);
+
+	if(isValid(ghostX+1,ghostY, last_ghost_x, last_ghost_y)) // right
+		possible_neighbords.push([ghostX+1,ghostY]);
+	else
+		possible_neighbords.push([]);
+
+	if(isValid(ghostX-1,ghostY, last_ghost_x, last_ghost_y)) // left
+		possible_neighbords.push([ghostX-1,ghostY]);
 	else
 		possible_neighbords.push([]);
 
@@ -350,8 +355,12 @@ function find_neighbords(ghostX, ghostY){ //todo implelemt
 	
 }
 
-function isValid(positionX,positionY){
+function isValid(positionX,positionY, last_ghost_x, last_ghost_y){
 	//return true is the index value is not a wall, ghost or out of board
+	if(positionX == last_ghost_x &&  positionX == last_ghost_y) // prevent loop
+	{
+		return false;
+	}
 	if(positionX<0 || positionY<0 ||  positionX > 9||  positionY > 9)
 	{
 		return false;
@@ -375,8 +384,8 @@ function find_neighbords_distances(neighbords){
 	return neighbords_distance;
 }
 
-function choose_next_step(ghostX, ghostY){ //todo implelemt
-	possible_steps = find_neighbords(ghostX, ghostY);
+function choose_next_step(ghostX, ghostY, last_ghost_x, last_ghost_y){ //todo implelemt
+	possible_steps = find_neighbords(ghostX, ghostY, last_ghost_x, last_ghost_y);
 	possible_steps_distances = find_neighbords_distances(possible_steps);
 
 	var best_step=Infinity;
@@ -389,8 +398,8 @@ function choose_next_step(ghostX, ghostY){ //todo implelemt
 		}
 	}	
 
-	res=["U","D","R","L"];
-	return res[index]; //return the chosen step by the distances 
+	directions=["U","D","R","L"];
+	return directions[index]; //return the chosen step by the distances 
 
 }
 
@@ -524,6 +533,7 @@ function UpdatePosition() {
 }
 
 function GhostEatPacman(){
+	board[shape.i][shape.j] = 0;
 	score -= 10;
 	pacman_lives -= 1;
 	var emptyCell = findRandomEmptyCell(board);
