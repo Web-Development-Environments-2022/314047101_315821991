@@ -307,11 +307,7 @@ function Draw() {
 			}
 			
 			if (ghosts_board[i][j] == 22) { //draw ghosts
-				//context.drawImage(ghost_1, center.x , center.y , 40, 40);
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "red"; //color
-				context.fill();
+				context.drawImage(ghost_1, center.x-17 , center.y-17 , 40, 40);
 			}
 		}
 	}
