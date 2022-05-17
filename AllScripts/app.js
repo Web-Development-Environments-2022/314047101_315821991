@@ -174,10 +174,10 @@ function Start() {
 	}
 	//add one clock
 	var emptyCellForClock = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = 66;
+	board[emptyCellForClock[0]][emptyCellForClock[1]] = 66;
 	//add one pill
 	var emptyCellForPill = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = 99;
+	board[emptyCellForPill[0]][emptyCellForPill[1]] = 99;
 
 
 	keysDown = {};
