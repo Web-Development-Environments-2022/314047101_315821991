@@ -3,8 +3,11 @@
 
 <ins>URL to the game: https://web-development-environments-2022.github.io/314047101_315821991/ </ins><br/><br/>
 
-Functionality:
+- Using java-script, HTML and CSS.  
 
+This is the classic Pacman game, with additional features we added.  
+
+Functionality:
 - You can sign up for the site, and login afterwards.
 - You can change the game settings (buttons, number of ghosts that will chase the pacman, number of balls and their colors, game length in seconds).
 - You will win the game only if you manage to eat all the balls before you run out of lives.
@@ -16,12 +19,11 @@ Functionality:
 <ins>The special functionality we added to the game:</ins>
 - A clock Which doubles the initial game time once eaten by the Pacman.
 - Pill that adds more life to the existing state of life once eaten by the Pacman.
+- The monsters in the game move smartly- and try to catch the pacman.
 
 Good Luck!
 
-Naama Baruch: 315821991  <br/>
-Talya Sakov: 314047101
-
+Made by Talya Sakov & Naama Baruch.
 
  
  
