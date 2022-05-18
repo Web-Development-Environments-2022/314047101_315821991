@@ -18,6 +18,7 @@ Functionality:
 <ins>The special functionality we added to the game:</ins>
 - A clock Which doubles the initial game time once eaten by the Pacman.
 - Pill that adds more life to the existing state of life once eaten by the Pacman.
+- The pacman moves continuously, non-stop, depending on the direction of the last button pressed (in according to how it moves in well-known pacman games).
 
 Good Luck!
 
