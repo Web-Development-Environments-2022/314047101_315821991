@@ -20,6 +20,7 @@ ghost_1.src = 'media/ghosts/ghost_4.png';
 
 // settings vars
 var balls_number_from_settings;
+var balls_eaten;
 var ballsNumber_5;
 var ballsNumber_15;
 var ballsNumber_25;
@@ -83,10 +84,10 @@ function gameEnded(reason_to_end) {
 function Start() {
 	last_direction = 4;
 	pacman_lives = 5;
+	balls_eaten = 0;
 	document.getElementById("pacman_lives_display").src = "media/lives/live_5.jpeg";
 	context = canvas.getContext("2d");
 	ghosts_current_positions = [[0,0],[0,9],[9,0],[9,9]];
-	gift_current_position = [5,5];
 	ghosts_last_positions = [[-1,-1],[-1,-1],[-1,-1],[-1,-1]];
 	PlayMusic();
 	total_score_value = (5 * ballsNumber_5) + (15 * ballsNumber_15) + (25 * ballsNumber_25); 
@@ -214,12 +215,21 @@ function Start() {
 		ghosts_board[index_x][index_y] = 22; // 22 marks ghosts position
 	
 	}
+	// add first gift
+	var valid=findRandomEmptyCell(board)
+	gift_current_position=[valid[0],valid[1]];
 	board[gift_current_position[0]][gift_current_position[1]] = 33;
+
 	interval = setInterval(UpdatePosition, 150);
 	ghost_interval = setInterval(UpdateGhosts, 600);
 	gift_interval = setInterval(UpdateGift,2500);
+}
 
-
+function UpdateGift(){
+	var valid=findRandomEmptyCell(board);
+	board[gift_current_position[0]][gift_current_position[1]]=0;
+	gift_current_position=[valid[0],valid[1]];
+	board[gift_current_position[0]][gift_current_position[1]] = 33;
 }
 
 function findRandomEmptyCell(board) {
@@ -328,13 +338,6 @@ function Draw() {
 			}
 		}
 	}
-}
-
-function UpdateGift(){
-	var valid=findRandomEmptyCell(board);
-	board[gift_current_position[0]][gift_current_position[1]]=0;
-	gift_current_position=[valid[0],valid[1]];
-	board[gift_current_position[0]][gift_current_position[1]] = 33;
 }
 
 function UpdateGhosts() {
@@ -591,12 +594,15 @@ function UpdatePosition() {
 	{
 		if (board_last_value == 5) {
 			score+=5;
+			balls_eaten += 1;
 		}
 		if (board_last_value == 15) {
 			score+=15;
+			balls_eaten += 1;
 		}
 		if (board_last_value == 25) {
 			score+=25;
+			balls_eaten += 1;
 		}
 		if (board_last_value == 66) {
 			time_to_play_from_settings=time_to_play_from_settings*2;
@@ -634,7 +640,7 @@ function UpdatePosition() {
 	{
 		gameEnded('no_more_time_to_play');
 	}
-	if (score == total_score_value) {
+	if (balls_eaten == balls_number_from_settings) {
 		gameEnded('win_the_game');
 	}
 	if (pacman_lives == 0) {
